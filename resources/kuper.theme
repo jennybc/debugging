@@ -1,0 +1,21 @@
+Description = "custom theme for rstudio conf talk"
+
+Default	      = { Colour="#A6A6A6" }
+Canvas	      = { Colour="#000000" }
+Number	      = { Colour="#FFB500" }
+Escape	      = { Colour="#808080" }
+String	      = { Colour="#FFB500" }
+BlockComment  = { Colour="#606080" }
+StringPreProc = String
+LineComment   = BlockComment
+Operator      = { Colour="#CCCCCC" }
+LineNum       = BlockComment
+PreProcessor  = Default
+Interpolation = { Colour="#CFA5DB" }
+
+Keywords = {
+  { Colour="#34B5E2" },
+  { Colour="#E0F6FF" },
+  { Colour="#7ff0a6" },
+  { Colour="#9fbfaf" },
+}
