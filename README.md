@@ -25,9 +25,12 @@ Slides as PDF file here in this repo *link to come*
 
 ## Video
 
-The talk will be live-streamed: *link to come*
+The talk will be live-streamed.
 
-Video is available here: *link to come, eventually*
+  * 9:00 AM - 10:00 AM, January 30, 2020 (Thursday, day 2 of conf)
+  * At that time, visit <https://rstudio.com/conference/> and it should be obvious how to access the stream.
+
+Video is available here: *link to come, eventually, after the conference*
 
 ## Credits and resources
 
