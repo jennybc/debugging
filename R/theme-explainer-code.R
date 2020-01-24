@@ -2,7 +2,7 @@ x <- rnorm(5)
 
 print(x)
 
-# regular comment
+# I use this file to explore / explain highlight themes
 cat("Hello World\n")
 
 fruit_avg <- function(dat, pattern) {
