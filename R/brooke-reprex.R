@@ -1,17 +1,16 @@
 #+ eval = FALSE
-dir_df <-
-  fs::dir_info(path = raw_data_path,        # list xls[s] files
-               regexp = "[.]xls[x]?$") %>%
+fs::dir_info(path = raw_data_path,        # list xls[s] files
+             regexp = "[.]xls[x]?$") %>%
 
-  dplyr::mutate(sheets = purrr::map(        # create list-col of
-    path, ~ readxl::excel_sheets)) %>%      # worksheets
+  dplyr::mutate(sheets = purrr::map(      # create list-col of
+    path, ~ readxl::excel_sheets)) %>%    # worksheets
 
-  tidyr::unnest(sheets) %>%                 # get one row per worksheet
+  tidyr::unnest(sheets) %>%               # get one row per worksheet
 
-  dplyr::mutate(data = purrr::map2(         # read data into a list-col
-    path, sheets,                           # of data frames
-    ~ readxl::read_excel(.x, .y) %>%        # call `as.character()`
-      dplyr::mutate_all(as.character)       # on each column
+  dplyr::mutate(data = purrr::map2(       # read data into a list-col
+    path, sheets,                         # of data frames
+    ~ readxl::read_excel(.x, .y) %>%      # call `as.character()`
+      dplyr::mutate_all(as.character)     # on each column
   ))
 #> New names:
 #> * `` -> `..2`
