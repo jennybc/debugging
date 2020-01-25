@@ -101,8 +101,6 @@ Quote attributed to [Douglas Adams](https://www.brainyquote.com/quotes/douglas_a
 
 ---
 
-
-
 Static code snippets prepared with the [reprex package](https://reprex.tidyverse.org), using [`venue = "rtf"`](https://reprex.tidyverse.org/articles/articles/rtf.html), which relies on [highlight](http://www.andre-simon.de/doku/highlight/en/highlight.php).
 
 GIFs of code prepared with [r-lib/asciicast](https://github.com/r-lib/asciicast) plus [asciinema/asciicast2gif](https://github.com/asciinema/asciicast2gif).
