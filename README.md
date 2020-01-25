@@ -46,7 +46,7 @@ This recommendation is explored more thoroughly in [Save source, not the workspa
 
 > One of the most useful things I’ve learned from hanging out with (much) better programmers: don’t wring hands and speculate. Work a small example that reveals, confirms, or eliminates something.
 
-Paraphrasing myself: <https://twitter.com/JennyBryan/status/952285541617123328>
+I'm paraphrasing my own tweet: <https://twitter.com/JennyBryan/status/952285541617123328>
 
 ---
 
@@ -56,10 +56,52 @@ RStudio webinar about reprex: [Help me help you: Creating reproducible examples 
 
 ---
 
+The REPREX section features several illustrations by [Christine Kuper](https://christinekuper.com).
 
-Stuff about another single slide or a different bunch of slides
+We gratefully acknowledge [Michelle Rial](https://www.michellerial.com) and her charts for an inspiring visual style.
 
 ---
+
+The example of how a wild-caught puzzle evolves into a good reprex was kindly donated by [Brooke Watson Madubuonwu](https://twitter.com/brookLYNevery1).
+
+Story concluded in [tidyverse/dplyr#4094](https://github.com/tidyverse/dplyr/issues/4094).
+
+---
+
+GitHub search for Hadley's "slightly more minimal reprexes": [`more minimal reprex NOT advice user:tidyverse user:r-lib user:hadley involves:hadley is:issue`] [](https://github.com/search?o=desc&q=more+minimal+reprex+NOT+advice+user%3Atidyverse+user%3Ar-lib+user%3Ahadley+involves%3Ahadley+is%3Aissue&s=updated&type=Issues)
+
+---
+
+Presentation of a rather intimidating R message was inspired by a Far Side comic from Gary Larson. You know ... the one about Ginger the dog and "blah blah".
+
+The Far Side very recently got a real online home: <https://www.thefarside.com>. However, last time I checked, this particular comic isn't there (yet). Hopefully it will appear one day and I can link to it.
+
+---
+
+All the code snippets from the `fruit_avg()` debugging example are in [R/](R).
+
+---
+
+[Debugging with RStudio](https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio)
+
+rlang's functions for [Errors, conditions, and backtraces](https://rlang.r-lib.org/reference/index.html#section-errors-conditions-and-backtraces)
+
+---
+
+Video of a tiny room hidden behind an electrical outlet is from Mozu Studios:
+
+  * <https://www.mozustudios.com>
+  * <https://www.instagram.com/p/B6NvxK7JnpU/>
+
+---
+
+> The major difference between a thing that might go wrong and a thing that cannot possibly go wrong is that when a thing that cannot possibly go wrong goes wrong it usually turns out to be impossible to get at and repair.
+
+Quote attributed to [Douglas Adams](https://www.brainyquote.com/quotes/douglas_adams_124773), but I am not sure of the original source.
+
+---
+
+
 
 Static code snippets prepared with the [reprex package](https://reprex.tidyverse.org), using [`venue = "rtf"`](https://reprex.tidyverse.org/articles/articles/rtf.html), which relies on [highlight](http://www.andre-simon.de/doku/highlight/en/highlight.php).
 
