@@ -14,14 +14,11 @@ GitHub: [@jennybc](https://github.com/jennybc)
 
 ## Slides
 
-*SpeakerDeck clickable thumbnail goes here*
-<!--
-<a href="https://speakerdeck.com/jennybc/code-smells-and-feels"><img src="2018-07_user-brisbane-400.jpeg"></a>
--->
+<a href="https://speakerdeck.com/jennybc/object-of-type-closure-is-not-subsettable"><img src="debugging-title-400.jpg"></a>
 
-Slides on SpeakerDeck *link to come*
+Slides [on SpeakerDeck](https://speakerdeck.com/jennybc/object-of-type-closure-is-not-subsettable)
 
-Slides as PDF file here in this repo *link to come*
+Slides [as PDF file](debugging-jenny-bryan.pdf) here in this repo 
 
 ## Video
 
