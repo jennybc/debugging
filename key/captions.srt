@@ -1,0 +1,5010 @@
+1
+00:00:05,700 --> 00:00:09,030
+Good morning and welcome
+back to RStudio Conf.
+
+2
+00:00:09,030 --> 00:00:09,915
+It's really--
+
+3
+00:00:09,915 --> 00:00:12,240
+[APPLAUSE]
+
+4
+00:00:15,970 --> 00:00:18,070
+It's really great to
+see you all here again,
+
+5
+00:00:18,070 --> 00:00:22,510
+whether it's in person or
+on one of our livestreams.
+
+6
+00:00:22,510 --> 00:00:25,660
+But now it's my very
+great honor to introduce
+
+7
+00:00:25,660 --> 00:00:28,450
+our next keynote speaker,
+my colleague and friend,
+
+8
+00:00:28,450 --> 00:00:29,290
+Jenny Bryan.
+
+9
+00:00:29,290 --> 00:00:32,278
+[APPLAUSE]
+
+10
+00:00:36,760 --> 00:00:38,500
+Jenny's work has
+almost certainly
+
+11
+00:00:38,500 --> 00:00:40,300
+touched you in some
+way, whether it's
+
+12
+00:00:40,300 --> 00:00:43,360
+one of her books like
+Happy Git With R or R,
+
+13
+00:00:43,360 --> 00:00:45,218
+What They Forgot to Teach You.
+
+14
+00:00:45,218 --> 00:00:47,260
+Or perhaps it's because
+you're afraid that you'll
+
+15
+00:00:47,260 --> 00:00:51,910
+set your computer on fire
+because you said "wd."
+
+16
+00:00:51,910 --> 00:00:56,050
+But-- or maybe you're
+using one of her packages,
+
+17
+00:00:56,050 --> 00:00:58,450
+like readxl or googlesheets
+to get data out
+
+18
+00:00:58,450 --> 00:01:02,770
+of spreadsheets, whether it's
+Excel or Google, and into R.
+
+19
+00:01:02,770 --> 00:01:07,270
+But of all the packages, of all
+the work that Jenny has done,
+
+20
+00:01:07,270 --> 00:01:11,680
+I think my favorite package
+is the reprex package.
+
+21
+00:01:11,680 --> 00:01:15,730
+Not only because it's
+such a great tool to help
+
+22
+00:01:15,730 --> 00:01:18,400
+you get help from other people.
+
+23
+00:01:18,400 --> 00:01:21,760
+But I think it's one of
+the rare packages that
+
+24
+00:01:21,760 --> 00:01:24,443
+has no precedent in
+any other package,
+
+25
+00:01:24,443 --> 00:01:25,860
+in any other
+programming language.
+
+26
+00:01:25,860 --> 00:01:28,210
+It's something
+that's genuinely new.
+
+27
+00:01:28,210 --> 00:01:30,850
+So without further ado, I'd
+like to welcome Jenny Bryan.
+
+28
+00:01:30,850 --> 00:01:33,808
+[APPLAUSE]
+
+29
+00:01:46,150 --> 00:01:50,590
+JENNY BRYAN: So this, I think,
+is R's most infamous error
+
+30
+00:01:50,590 --> 00:01:54,580
+message, object of type
+closure is not subsettable.
+
+31
+00:01:54,580 --> 00:01:56,800
+It was my title, as
+a joke, for a while.
+
+32
+00:01:56,800 --> 00:02:00,080
+And then people thought I
+should actually stick with it.
+
+33
+00:02:00,080 --> 00:02:02,500
+So I have 20 years of
+experience triggering
+
+34
+00:02:02,500 --> 00:02:08,169
+this bug, which is why I can
+now do it in two lines of code.
+
+35
+00:02:08,169 --> 00:02:10,000
+And this is also, I
+think, commonly how
+
+36
+00:02:10,000 --> 00:02:12,000
+it actually happens,
+although it's usually never
+
+37
+00:02:12,000 --> 00:02:13,870
+quite this clear.
+
+38
+00:02:13,870 --> 00:02:15,730
+But you create your
+main data object.
+
+39
+00:02:15,730 --> 00:02:17,680
+You call it dat.
+
+40
+00:02:17,680 --> 00:02:21,550
+Then you promptly lose all
+memory of having done so.
+
+41
+00:02:21,550 --> 00:02:27,520
+And you ask for the x column
+of df, which you haven't made.
+
+42
+00:02:27,520 --> 00:02:28,450
+But df exists.
+
+43
+00:02:28,450 --> 00:02:31,690
+It's a function that gives
+you the density of the F
+
+44
+00:02:31,690 --> 00:02:32,510
+distribution.
+
+45
+00:02:32,510 --> 00:02:34,870
+So what you've asked
+for makes no sense,
+
+46
+00:02:34,870 --> 00:02:37,570
+and R tells you this in
+this very special way.
+
+47
+00:02:38,320 --> 00:02:43,430
+And my sort of fantasy
+message down there
+
+48
+00:02:43,430 --> 00:02:46,720
+is maybe it would be able to
+somehow read my mind, which is
+
+49
+00:02:46,720 --> 00:02:49,280
+obviously not going to happen.
+
+50
+00:02:49,280 --> 00:02:51,460
+And so this sets the mood
+for the next hour, where
+
+51
+00:02:51,460 --> 00:02:53,860
+I want to talk about
+general strategies
+
+52
+00:02:53,860 --> 00:02:58,450
+for coping with confusing
+and frustrating situations.
+
+53
+00:02:58,450 --> 00:02:59,860
+So you went into data science.
+
+54
+00:02:59,860 --> 00:03:02,680
+You were probably told that
+it's going to be glamor and fun,
+
+55
+00:03:02,680 --> 00:03:04,810
+like, 24/7.
+
+56
+00:03:04,810 --> 00:03:09,460
+And you would make very creative
+concoctions that you present,
+
+57
+00:03:09,460 --> 00:03:12,100
+and people love to consume it.
+
+58
+00:03:12,100 --> 00:03:14,200
+But there's all this
+drudgery, as there
+
+59
+00:03:14,200 --> 00:03:17,800
+is in any job, where
+we actually spend
+
+60
+00:03:17,800 --> 00:03:22,420
+a much greater proportion of
+our time and our mental energy.
+
+61
+00:03:22,420 --> 00:03:26,770
+And so I've sort of made a
+habit of talking and teaching
+
+62
+00:03:26,770 --> 00:03:31,000
+about those things so that you
+feel really cool and have fun,
+
+63
+00:03:31,000 --> 00:03:33,800
+but you get your
+drudgery done as well.
+
+64
+00:03:33,800 --> 00:03:36,352
+So we're not using Slido
+for live questions,
+
+65
+00:03:36,352 --> 00:03:38,560
+although you're welcome to
+ask them because I'm going
+
+66
+00:03:38,560 --> 00:03:41,590
+to blog about this talk later.
+
+67
+00:03:41,590 --> 00:03:45,437
+But I am using Slido
+Live for some polls.
+
+68
+00:03:45,437 --> 00:03:47,770
+So if you're willing to get
+your laptop or your computer
+
+69
+00:03:47,770 --> 00:03:51,400
+out, your phone out,
+I'm curious what
+
+70
+00:03:51,400 --> 00:03:53,470
+your current main
+debugging method is.
+
+71
+00:03:53,470 --> 00:03:55,480
+And if you use multiple,
+as you probably do,
+
+72
+00:03:55,480 --> 00:03:58,180
+you will have to
+pick a favorite.
+
+73
+00:03:58,180 --> 00:03:59,980
+And while I'm letting
+you take this poll,
+
+74
+00:03:59,980 --> 00:04:01,355
+I'm going to say
+a few more words
+
+75
+00:04:01,355 --> 00:04:06,760
+about why I think this is so
+important, the drudgery part.
+
+76
+00:04:06,760 --> 00:04:10,270
+So we don't give a name to these
+things and give them dignity.
+
+77
+00:04:10,270 --> 00:04:13,810
+When you lose half of your day
+to doing something like this,
+
+78
+00:04:13,810 --> 00:04:16,300
+it's extremely
+demotivating because you
+
+79
+00:04:16,300 --> 00:04:20,120
+feel like you haven't actually
+gotten any real work done.
+
+80
+00:04:20,120 --> 00:04:22,270
+And the other risk,
+especially with debugging,
+
+81
+00:04:22,270 --> 00:04:25,660
+is if you're only
+reactive and you're always
+
+82
+00:04:25,660 --> 00:04:30,580
+dealing with today's bug, it
+means that you are constantly
+
+83
+00:04:30,580 --> 00:04:33,490
+putting out fires, and you
+don't probably have the time
+
+84
+00:04:33,490 --> 00:04:35,200
+at that point to take--
+
+85
+00:04:35,200 --> 00:04:38,110
+to develop your debugging
+skills and be a little bit
+
+86
+00:04:38,110 --> 00:04:39,460
+proactive about it.
+
+87
+00:04:39,460 --> 00:04:41,740
+But you shouldn't be
+perpetually surprised
+
+88
+00:04:41,740 --> 00:04:42,760
+that there's a new bug.
+
+89
+00:04:42,760 --> 00:04:43,960
+Like, really, again?
+
+90
+00:04:43,960 --> 00:04:45,430
+Today?
+
+91
+00:04:45,430 --> 00:04:47,320
+This is going to
+happen every day,
+
+92
+00:04:47,320 --> 00:04:49,570
+and it's actually worth
+giving some thought
+
+93
+00:04:49,570 --> 00:04:51,740
+to how you want to do things.
+
+94
+00:04:51,740 --> 00:04:58,340
+So let's see if
+anyone's responded.
+
+95
+00:05:01,830 --> 00:05:04,020
+I think they have.
+
+96
+00:05:04,020 --> 00:05:07,545
+But it's difficult for
+me to refresh over here.
+
+97
+00:05:10,600 --> 00:05:13,360
+It's a very complicated
+problem with how
+
+98
+00:05:13,360 --> 00:05:14,530
+I'm using this computer.
+
+99
+00:05:14,530 --> 00:05:17,910
+So I am going to
+keep taking polls.
+
+100
+00:05:17,910 --> 00:05:20,095
+And I am not going to
+show you the results.
+
+101
+00:05:22,680 --> 00:05:25,660
+And I will assume they are
+what I think they should be,
+
+102
+00:05:25,660 --> 00:05:28,000
+which is that it's probably
+all over the map there.
+
+103
+00:05:28,000 --> 00:05:32,823
+I will reveal this in the
+promised blog post as well.
+
+104
+00:05:32,823 --> 00:05:34,240
+So here's where
+we're going to go.
+
+105
+00:05:34,240 --> 00:05:36,580
+There's four sections
+of this talk.
+
+106
+00:05:36,580 --> 00:05:39,280
+And I hope that there's
+something for everyone
+
+107
+00:05:39,280 --> 00:05:42,640
+here, depending on
+your R experience can
+
+108
+00:05:42,640 --> 00:05:44,463
+be quite little or quite a lot.
+
+109
+00:05:44,463 --> 00:05:45,880
+And there'll be
+something that you
+
+110
+00:05:45,880 --> 00:05:48,160
+find interesting useful,
+or at least makes you feel
+
+111
+00:05:48,160 --> 00:05:50,930
+very validated in what you do.
+
+112
+00:05:50,930 --> 00:05:53,110
+And this is also basically
+approximately the order
+
+113
+00:05:53,110 --> 00:05:54,820
+in which I do these things.
+
+114
+00:05:54,820 --> 00:05:56,590
+And they do all
+come up all the time
+
+115
+00:05:56,590 --> 00:05:59,645
+on most puzzling situations.
+
+116
+00:05:59,645 --> 00:06:01,270
+So the first thing
+I want to talk about
+
+117
+00:06:01,270 --> 00:06:05,020
+is the beauty of
+resetting things.
+
+118
+00:06:05,020 --> 00:06:08,200
+Earlier this week we
+ran a ton of workshops.
+
+119
+00:06:08,200 --> 00:06:09,400
+I helped out in one.
+
+120
+00:06:09,400 --> 00:06:12,640
+I was not in charge
+because I was doing this.
+
+121
+00:06:12,640 --> 00:06:15,190
+And this reaffirmed
+my commitment
+
+122
+00:06:15,190 --> 00:06:17,860
+to how important
+the idea of resets
+
+123
+00:06:17,860 --> 00:06:21,370
+and why it really should
+be your first strategy.
+
+124
+00:06:21,370 --> 00:06:24,280
+So as soon as you get
+some sort of error,
+
+125
+00:06:24,280 --> 00:06:26,230
+I don't know about you,
+but I immediately--
+
+126
+00:06:26,230 --> 00:06:29,290
+I just send that
+same command again.
+
+127
+00:06:29,290 --> 00:06:34,270
+Because maybe it's
+going to work this time.
+
+128
+00:06:34,270 --> 00:06:38,140
+And it does not ever, ever work.
+
+129
+00:06:38,140 --> 00:06:40,810
+But there is a small
+variation on this
+
+130
+00:06:40,810 --> 00:06:44,260
+that is an extremely
+productive implementation.
+
+131
+00:06:44,260 --> 00:06:48,070
+And it's the world's most
+famous troubleshooting advice
+
+132
+00:06:48,070 --> 00:06:51,190
+for anything, but
+especially tech,
+
+133
+00:06:51,190 --> 00:06:53,470
+because it's so hard
+to get this right,
+
+134
+00:06:53,470 --> 00:06:56,290
+that you should try turning
+it off and turning it
+
+135
+00:06:56,290 --> 00:06:58,130
+back on again.
+
+136
+00:06:58,130 --> 00:06:58,990
+And why is that?
+
+137
+00:06:58,990 --> 00:07:03,100
+So this is a super corny phrase
+that we have all heard before,
+
+138
+00:07:03,100 --> 00:07:05,680
+that if you love something,
+you need to set it free.
+
+139
+00:07:05,680 --> 00:07:08,360
+And if it's really
+yours, it will come back.
+
+140
+00:07:08,360 --> 00:07:12,170
+And I think this applies
+to unloved things as well.
+
+141
+00:07:12,170 --> 00:07:16,030
+So if you have a
+strange problem,
+
+142
+00:07:16,030 --> 00:07:18,640
+and it just actually
+doesn't make much sense,
+
+143
+00:07:18,640 --> 00:07:22,030
+consider setting it
+free, restarting R,
+
+144
+00:07:22,030 --> 00:07:25,140
+and see if it comes back.
+
+145
+00:07:25,140 --> 00:07:27,700
+So I want you to restart
+R often, and especially
+
+146
+00:07:27,700 --> 00:07:29,080
+when things get weird.
+
+147
+00:07:29,080 --> 00:07:31,150
+And you might think
+I'm being glib
+
+148
+00:07:31,150 --> 00:07:34,120
+or I'm just trying to sweep
+some problem under the rug.
+
+149
+00:07:34,120 --> 00:07:35,480
+But that is not actually true.
+
+150
+00:07:35,480 --> 00:07:38,380
+It's like one of the things
+that's pretty unusual about R
+
+151
+00:07:38,380 --> 00:07:42,018
+is we install and
+update packages from R.
+
+152
+00:07:42,018 --> 00:07:44,560
+And this is a little bit like
+working on your airplane engine
+
+153
+00:07:44,560 --> 00:07:46,270
+while you're flying.
+
+154
+00:07:46,270 --> 00:07:51,337
+And I think people updating
+and installing packages
+
+155
+00:07:51,337 --> 00:07:53,420
+while they're doing work
+in R, and especially they
+
+156
+00:07:53,420 --> 00:07:56,560
+have multiple R sessions
+open, is a common reason
+
+157
+00:07:56,560 --> 00:08:00,520
+why things get funky in a way
+that's quite difficult to debug
+
+158
+00:08:00,520 --> 00:08:02,100
+and understand.
+
+159
+00:08:02,100 --> 00:08:04,960
+And the good news is
+you don't have to.
+
+160
+00:08:04,960 --> 00:08:08,170
+Quit, restart, and
+you're guaranteed
+
+161
+00:08:08,170 --> 00:08:12,310
+to have the package version
+that's loaded into memory
+
+162
+00:08:12,310 --> 00:08:14,620
+be the one that was
+installed on disk.
+
+163
+00:08:14,620 --> 00:08:18,250
+So that's an example of why
+this is a legitimate way
+
+164
+00:08:18,250 --> 00:08:20,420
+to reset things.
+
+165
+00:08:20,420 --> 00:08:22,570
+So how do we actually
+do this in R?
+
+166
+00:08:22,570 --> 00:08:25,520
+So this is the RStudio version.
+
+167
+00:08:25,520 --> 00:08:28,000
+There is a menu
+entry, where you can
+
+168
+00:08:28,000 --> 00:08:32,230
+restart R. I have this
+keyboard shortcut emblazoned
+
+169
+00:08:32,230 --> 00:08:33,429
+into my brain.
+
+170
+00:08:33,429 --> 00:08:36,730
+It's something I do
+many times per day.
+
+171
+00:08:36,730 --> 00:08:39,190
+And the second thing I
+recommend that you consider--
+
+172
+00:08:39,190 --> 00:08:40,970
+this is kind of a
+big lifestyle change,
+
+173
+00:08:40,970 --> 00:08:43,390
+so don't do it right now--
+
+174
+00:08:43,390 --> 00:08:49,870
+is to consider not reloading
+your workspace at startup
+
+175
+00:08:49,870 --> 00:08:52,120
+and not saving
+your workspace when
+
+176
+00:08:52,120 --> 00:08:56,630
+you quit R. It's a pretty
+radical lifestyle change.
+
+177
+00:08:56,630 --> 00:08:57,460
+[APPLAUSE]
+
+178
+00:08:57,460 --> 00:08:59,230
+Yes.
+
+179
+00:08:59,230 --> 00:09:02,470
+And I get a lot of
+push-back on this, so I
+
+180
+00:09:02,470 --> 00:09:03,640
+do appreciate the clapping.
+
+181
+00:09:03,640 --> 00:09:07,120
+I'm going to remember that when
+I get this week's push-back.
+
+182
+00:09:07,120 --> 00:09:09,760
+This is the way to do
+this if you were just
+
+183
+00:09:09,760 --> 00:09:10,930
+starting R in a terminal.
+
+184
+00:09:10,930 --> 00:09:13,660
+And I also just want to use
+this as a proxy for that
+
+185
+00:09:13,660 --> 00:09:15,230
+figure I just showed you.
+
+186
+00:09:15,230 --> 00:09:18,280
+So you can start R with
+command line flags,
+
+187
+00:09:18,280 --> 00:09:22,560
+including no save
+and no restore data.
+
+188
+00:09:22,560 --> 00:09:24,220
+And I want to argue
+this is vastly
+
+189
+00:09:24,220 --> 00:09:26,510
+superior to another thing
+that a lot of us do.
+
+190
+00:09:26,510 --> 00:09:29,200
+And I have lots of
+this on my computer
+
+191
+00:09:29,200 --> 00:09:34,600
+from previous years, where
+people use rm list equals ls.
+
+192
+00:09:34,600 --> 00:09:37,750
+So that lists all the objects
+in the global workspace,
+
+193
+00:09:37,750 --> 00:09:39,257
+and it deletes them.
+
+194
+00:09:39,257 --> 00:09:40,840
+And so this is a
+really common command
+
+195
+00:09:40,840 --> 00:09:43,410
+to see at the top of R scripts.
+
+196
+00:09:43,410 --> 00:09:48,590
+And believe me, this was my
+like 100% practice all the time.
+
+197
+00:09:48,590 --> 00:09:52,030
+But the problem is it
+doesn't really go far enough.
+
+198
+00:09:52,030 --> 00:09:53,493
+So this brings me
+to my next poll.
+
+199
+00:09:53,493 --> 00:09:55,660
+And I'm going to continue
+to believe that you're all
+
+200
+00:09:55,660 --> 00:09:58,090
+filling out the poll.
+
+201
+00:09:58,090 --> 00:10:03,190
+And I want you to think
+about these six R commands.
+
+202
+00:10:03,190 --> 00:10:05,800
+And they all have
+some sort of effect.
+
+203
+00:10:05,800 --> 00:10:10,930
+And then let's say you execute
+this command rm list equals ls.
+
+204
+00:10:10,930 --> 00:10:16,090
+Which of these effects will
+persist in this session
+
+205
+00:10:16,090 --> 00:10:16,840
+after that?
+
+206
+00:10:16,840 --> 00:10:20,533
+And I will give you
+a minute to do this
+
+207
+00:10:20,533 --> 00:10:22,450
+because this one requires
+a bit more thinking.
+
+208
+00:10:22,450 --> 00:10:25,330
+You can select-- you should
+be selecting multiple answers.
+
+209
+00:10:39,935 --> 00:10:41,310
+And I didn't give
+you permission,
+
+210
+00:10:41,310 --> 00:10:43,435
+but you are allowed to talk
+to your neighbor, which
+
+211
+00:10:43,435 --> 00:10:44,860
+many of you clearly are.
+
+212
+00:10:44,860 --> 00:10:46,380
+We encourage that.
+
+213
+00:10:46,380 --> 00:10:47,130
+It's not cheating.
+
+214
+00:11:20,710 --> 00:11:23,010
+They're good?
+
+215
+00:11:23,010 --> 00:11:25,140
+OK.
+
+216
+00:11:25,140 --> 00:11:27,660
+I hear there are responses.
+
+217
+00:11:27,660 --> 00:11:31,200
+So I'm going to
+do the big reveal.
+
+218
+00:11:31,200 --> 00:11:37,350
+So library dplyr
+leaves dplyr attached.
+
+219
+00:11:37,350 --> 00:11:42,720
+So that persists after
+rm list equal ls.
+
+220
+00:11:42,720 --> 00:11:45,810
+Redefining the summary
+function, that's been cleared.
+
+221
+00:11:45,810 --> 00:11:49,920
+So you have a free set summary
+to its normal definition.
+
+222
+00:11:49,920 --> 00:11:52,710
+If you've changed an option,
+like stringsAsFactors,
+
+223
+00:11:52,710 --> 00:11:56,610
+from true to false, that
+persists in this session.
+
+224
+00:11:56,610 --> 00:11:59,042
+If you've changed the
+language of the session,
+
+225
+00:11:59,042 --> 00:12:01,250
+that's going to affect what
+error messages look like,
+
+226
+00:12:01,250 --> 00:12:01,810
+for example.
+
+227
+00:12:01,810 --> 00:12:04,410
+That persists.
+
+228
+00:12:04,410 --> 00:12:06,240
+Binding one, two,
+three, four, five
+
+229
+00:12:06,240 --> 00:12:07,860
+to the name x, that's gone.
+
+230
+00:12:07,860 --> 00:12:09,270
+X is gone.
+
+231
+00:12:09,270 --> 00:12:11,940
+But if you've attached an
+environment or a data frame
+
+232
+00:12:11,940 --> 00:12:15,010
+to the search path, that's
+still there as well.
+
+233
+00:12:15,010 --> 00:12:19,740
+And so all of those four
+things that persist here
+
+234
+00:12:19,740 --> 00:12:21,360
+aren't top of mind.
+
+235
+00:12:21,360 --> 00:12:23,530
+You're really thinking
+about those objects.
+
+236
+00:12:23,530 --> 00:12:28,170
+But they all have an effect on
+how your subsequent code runs.
+
+237
+00:12:28,170 --> 00:12:32,010
+And so this makes it
+very easy to develop code
+
+238
+00:12:32,010 --> 00:12:34,170
+under a set of
+expectations that will not
+
+239
+00:12:34,170 --> 00:12:37,230
+hold when someone
+else runs that code
+
+240
+00:12:37,230 --> 00:12:40,830
+or when you are running
+it in a fresh R session.
+
+241
+00:12:40,830 --> 00:12:45,360
+So it's for that reason
+that I think starting R
+
+242
+00:12:45,360 --> 00:12:47,440
+in a way where you don't
+reload the workspace
+
+243
+00:12:47,440 --> 00:12:51,240
+and you don't save it is vastly
+superior to this practice,
+
+244
+00:12:51,240 --> 00:12:54,630
+because it's really like if you
+care enough to kill your work
+
+245
+00:12:54,630 --> 00:12:58,920
+space, you care enough
+to restart R. You should
+
+246
+00:12:58,920 --> 00:13:01,350
+go that far, so
+fresh starts, clean
+
+247
+00:13:01,350 --> 00:13:03,870
+the workspace, reset options,
+and environment variables,
+
+248
+00:13:03,870 --> 00:13:06,450
+and clear the search path.
+
+249
+00:13:06,450 --> 00:13:10,110
+So I want us to think of this as
+your R sessions are like crops.
+
+250
+00:13:10,110 --> 00:13:10,860
+You grow them.
+
+251
+00:13:10,860 --> 00:13:15,560
+You harvest them without
+any fear, not a house plant.
+
+252
+00:13:15,560 --> 00:13:19,110
+There's another saying
+from the cloud and VM
+
+253
+00:13:19,110 --> 00:13:21,540
+world it's more morbid
+about livestock and pets.
+
+254
+00:13:21,540 --> 00:13:27,360
+So this is our slightly kinder,
+gentler version of that.
+
+255
+00:13:27,360 --> 00:13:33,870
+And this practice of having
+no memory, in some sense,
+
+256
+00:13:33,870 --> 00:13:36,510
+of not loading your
+workspace and not saving it
+
+257
+00:13:36,510 --> 00:13:39,750
+is pretty difficult to
+implement by itself.
+
+258
+00:13:39,750 --> 00:13:44,010
+It really works best in
+synergy with some other habits,
+
+259
+00:13:44,010 --> 00:13:48,660
+in particular saving your source
+is obviously very important.
+
+260
+00:13:48,660 --> 00:13:49,950
+So source is real.
+
+261
+00:13:49,950 --> 00:13:52,255
+And there's some other habits
+that are quite important.
+
+262
+00:13:52,255 --> 00:13:54,630
+So at the beginning I actually
+should have mentioned this
+
+263
+00:13:54,630 --> 00:13:58,170
+there's an rstud.io
+debugging short link.
+
+264
+00:13:58,170 --> 00:14:00,960
+And that will take
+you to a read me
+
+265
+00:14:00,960 --> 00:14:04,740
+on GitHub that has a lot of
+links related to the talks
+
+266
+00:14:04,740 --> 00:14:07,560
+that aren't in the slides,
+but if you want to follow up
+
+267
+00:14:07,560 --> 00:14:10,055
+on some of these ideas.
+
+268
+00:14:10,055 --> 00:14:11,180
+So let's talk about reprex.
+
+269
+00:14:11,180 --> 00:14:15,180
+I'm very excited
+that Hadley likes it.
+
+270
+00:14:15,180 --> 00:14:17,767
+And I should really-- well,
+we'll get to this credit.
+
+271
+00:14:17,767 --> 00:14:20,100
+It's really a wrap around
+things other people have made.
+
+272
+00:14:20,100 --> 00:14:23,170
+But it's a very handy
+wrapper, I will have to say.
+
+273
+00:14:23,170 --> 00:14:25,050
+And I'm kind of talking
+about the package,
+
+274
+00:14:25,050 --> 00:14:28,170
+but I really want to talk
+about the reprex mindset more
+
+275
+00:14:28,170 --> 00:14:30,400
+than anything.
+
+276
+00:14:30,400 --> 00:14:33,210
+So you know that if I get a
+mistake, the first thing I do
+
+277
+00:14:33,210 --> 00:14:35,680
+is I submit the
+same command again.
+
+278
+00:14:35,680 --> 00:14:39,000
+The next thing you might do
+is sort of brood, dither,
+
+279
+00:14:39,000 --> 00:14:42,030
+and fret about what
+you've just seen.
+
+280
+00:14:42,030 --> 00:14:43,530
+And a lot of people
+just immediately
+
+281
+00:14:43,530 --> 00:14:47,160
+go into speculating usually
+about worst-case scenarios
+
+282
+00:14:47,160 --> 00:14:49,670
+about what could
+possibly be wrong.
+
+283
+00:14:49,670 --> 00:14:53,460
+And this is just as effective
+as submitting the same command
+
+284
+00:14:53,460 --> 00:14:57,270
+again, which is to say that it
+is not effective in the least.
+
+285
+00:14:57,270 --> 00:15:02,010
+And so one good way to knock
+yourself out of this paralysis
+
+286
+00:15:02,010 --> 00:15:05,380
+is to work a small example.
+
+287
+00:15:05,380 --> 00:15:08,640
+And for years, I was
+a statistics professor
+
+288
+00:15:08,640 --> 00:15:11,880
+who cared about R, but I was
+by no means a professional R
+
+289
+00:15:11,880 --> 00:15:13,787
+programmer.
+
+290
+00:15:13,787 --> 00:15:15,870
+And then over various
+years, I started hanging out
+
+291
+00:15:15,870 --> 00:15:17,260
+more and more with the experts.
+
+292
+00:15:17,260 --> 00:15:19,440
+And I think I finally
+crossed the line into being
+
+293
+00:15:19,440 --> 00:15:20,610
+one of those experts now.
+
+294
+00:15:20,610 --> 00:15:22,235
+And here's one of
+the things I learned.
+
+295
+00:15:22,235 --> 00:15:24,300
+I used to think that
+the experts just
+
+296
+00:15:24,300 --> 00:15:27,540
+knew everything all the time.
+
+297
+00:15:27,540 --> 00:15:29,640
+And that's not true.
+
+298
+00:15:29,640 --> 00:15:31,440
+They know some things for sure.
+
+299
+00:15:31,440 --> 00:15:34,650
+But a bigger distinction
+is they have this habit
+
+300
+00:15:34,650 --> 00:15:37,360
+of working in an example.
+
+301
+00:15:37,360 --> 00:15:42,030
+So if there's a really weird
+situation, they test a theory,
+
+302
+00:15:42,030 --> 00:15:44,550
+or they gather some data.
+
+303
+00:15:44,550 --> 00:15:48,240
+And this is much more
+approachable as a strategy
+
+304
+00:15:48,240 --> 00:15:49,980
+than trying to solve
+all your problems.
+
+305
+00:15:49,980 --> 00:15:53,220
+All you have to do is
+work one small example
+
+306
+00:15:53,220 --> 00:15:55,470
+that sheds a new
+light on the problem,
+
+307
+00:15:55,470 --> 00:16:01,050
+confirms so-and-so's theory or
+rules so-and-so's theory out.
+
+308
+00:16:01,050 --> 00:16:04,830
+So the term minimum reproducible
+example is pre-existing.
+
+309
+00:16:04,830 --> 00:16:07,560
+It's important across all
+programming languages.
+
+310
+00:16:07,560 --> 00:16:09,450
+And a minimal
+reproducible example
+
+311
+00:16:09,450 --> 00:16:13,530
+is much beloved in places like
+Stack Overflow and GitHub.
+
+312
+00:16:13,530 --> 00:16:15,720
+And my colleague,
+Romain Francois,
+
+313
+00:16:15,720 --> 00:16:18,330
+decided to coin the term
+reprex by mushing those two
+
+314
+00:16:18,330 --> 00:16:19,940
+words together.
+
+315
+00:16:19,940 --> 00:16:23,000
+And at that same time, I
+was creating this package
+
+316
+00:16:23,000 --> 00:16:27,470
+mostly out of wild frustration
+with code conversations
+
+317
+00:16:27,470 --> 00:16:28,380
+with my students.
+
+318
+00:16:28,380 --> 00:16:30,490
+So I used the name.
+
+319
+00:16:30,490 --> 00:16:35,030
+And making a reprex is
+both a science and an art.
+
+320
+00:16:35,030 --> 00:16:38,690
+So the reproducible part
+is the science part.
+
+321
+00:16:38,690 --> 00:16:42,410
+And that means you've provided
+code that someone else could
+
+322
+00:16:42,410 --> 00:16:43,880
+actually run.
+
+323
+00:16:43,880 --> 00:16:47,090
+And that's what the reprex
+package can help with.
+
+324
+00:16:47,090 --> 00:16:52,033
+It can only help with sort
+of mechanical robotic things.
+
+325
+00:16:52,033 --> 00:16:53,450
+But then there's
+this whole aspect
+
+326
+00:16:53,450 --> 00:16:55,610
+about the art of
+making a reprex.
+
+327
+00:16:55,610 --> 00:16:58,690
+And that's making it minimal.
+
+328
+00:16:58,690 --> 00:17:01,220
+And only humans
+really can do that.
+
+329
+00:17:01,220 --> 00:17:04,430
+And so that comes with having
+more and more experience.
+
+330
+00:17:04,430 --> 00:17:07,550
+And if you can't instantly
+give yourself more experience,
+
+331
+00:17:07,550 --> 00:17:12,470
+you can hang out in places where
+you're exposed to good reprexes
+
+332
+00:17:12,470 --> 00:17:15,020
+all the time, and you'll
+start to absorb what
+
+333
+00:17:15,020 --> 00:17:17,869
+the principles of that are.
+
+334
+00:17:17,869 --> 00:17:21,980
+So I'm about to show you a
+few tiny snippets of code
+
+335
+00:17:21,980 --> 00:17:24,109
+that aren't quite
+complete and that
+
+336
+00:17:24,109 --> 00:17:27,950
+recapitulate a lot
+of the struggles seen
+
+337
+00:17:27,950 --> 00:17:30,380
+when people post examples.
+
+338
+00:17:30,380 --> 00:17:34,310
+And then we'll just see
+a nice beautiful reprex.
+
+339
+00:17:34,310 --> 00:17:38,030
+So I want you to try to
+run this code in your mind
+
+340
+00:17:38,030 --> 00:17:41,600
+and identify what
+the mistake is.
+
+341
+00:17:41,600 --> 00:17:43,220
+Why is there an error?
+
+342
+00:17:43,220 --> 00:17:45,660
+And I'll give you a couple
+of seconds to look at this.
+
+343
+00:17:52,390 --> 00:17:54,130
+So template is a string.
+
+344
+00:17:54,130 --> 00:17:59,230
+It's got place holders for an
+exclamation and an adjective.
+
+345
+00:17:59,230 --> 00:18:02,050
+And then I call a
+function praise on it.
+
+346
+00:18:02,050 --> 00:18:05,470
+But this is not a function
+in base R. So the error
+
+347
+00:18:05,470 --> 00:18:08,470
+that we get is that it can't
+find the function praise.
+
+348
+00:18:08,470 --> 00:18:09,898
+So this is a
+problem that you see
+
+349
+00:18:09,898 --> 00:18:12,190
+when people post a lot of
+code, but they don't tell you
+
+350
+00:18:12,190 --> 00:18:13,840
+which packages they're using.
+
+351
+00:18:13,840 --> 00:18:15,910
+And you get to slowly
+sort of figure that out
+
+352
+00:18:15,910 --> 00:18:17,990
+through 20 questions.
+
+353
+00:18:17,990 --> 00:18:21,453
+So here's another
+small variant of this.
+
+354
+00:18:21,453 --> 00:18:22,870
+Let's run that
+again in your head.
+
+355
+00:18:22,870 --> 00:18:26,960
+Imagine it in a fresh R session,
+not the one that we just used.
+
+356
+00:18:30,530 --> 00:18:33,810
+So here we do remember to
+attach the praise package.
+
+357
+00:18:33,810 --> 00:18:36,280
+And then we call
+praise on template.
+
+358
+00:18:36,280 --> 00:18:39,590
+But template has not
+been divined here.
+
+359
+00:18:39,590 --> 00:18:42,800
+It might exist on
+someone's computer,
+
+360
+00:18:42,800 --> 00:18:44,660
+whoever ran that code.
+
+361
+00:18:44,660 --> 00:18:46,430
+But in terms of by
+the time this code
+
+362
+00:18:46,430 --> 00:18:50,700
+goes somewhere, again, someone
+won't be able to run this.
+
+363
+00:18:50,700 --> 00:18:54,050
+So in this super
+tiny example, this
+
+364
+00:18:54,050 --> 00:18:56,030
+is what a complete
+reprex would look like.
+
+365
+00:18:56,030 --> 00:18:58,430
+We declare all of
+our dependencies.
+
+366
+00:18:58,430 --> 00:19:00,470
+We are attaching
+the praise package.
+
+367
+00:19:00,470 --> 00:19:04,820
+We create all of our inputs,
+like this template object.
+
+368
+00:19:04,820 --> 00:19:06,570
+And then we do the
+thing we've come to do,
+
+369
+00:19:06,570 --> 00:19:08,900
+which is to emit some praise.
+
+370
+00:19:08,900 --> 00:19:13,730
+And so making this type of
+error and correction easier
+
+371
+00:19:13,730 --> 00:19:17,780
+is one of the main reasons
+for the reprex package,
+
+372
+00:19:17,780 --> 00:19:20,060
+is to sort of help
+people put their code
+
+373
+00:19:20,060 --> 00:19:22,220
+on a little spaceship
+and send it somewhere
+
+374
+00:19:22,220 --> 00:19:25,370
+to be executed in isolation.
+
+375
+00:19:25,370 --> 00:19:27,320
+And so the reproducible
+part is that there's
+
+376
+00:19:27,320 --> 00:19:29,960
+no reliance on hidden
+state or secret things
+
+377
+00:19:29,960 --> 00:19:31,850
+that I know that you
+don't know or that
+
+378
+00:19:31,850 --> 00:19:36,500
+are true about my R session
+that aren't true about yours.
+
+379
+00:19:36,500 --> 00:19:39,620
+And another reason it's
+incredibly important to
+
+380
+00:19:39,620 --> 00:19:41,090
+provide--
+
+381
+00:19:41,090 --> 00:19:43,790
+to express your problem
+in runnable code
+
+382
+00:19:43,790 --> 00:19:45,830
+is because of this.
+
+383
+00:19:45,830 --> 00:19:47,600
+So I don't know if
+you've ever tried
+
+384
+00:19:47,600 --> 00:19:52,610
+to help a relative with a
+tech problem over the phone.
+
+385
+00:19:52,610 --> 00:19:55,310
+But there's what someone
+thinks they're doing--
+
+386
+00:19:55,310 --> 00:19:58,070
+I trust everyone has
+good intentions--
+
+387
+00:19:58,070 --> 00:20:00,140
+and what they say they're doing.
+
+388
+00:20:00,140 --> 00:20:02,660
+And then there's what
+they're actually doing.
+
+389
+00:20:02,660 --> 00:20:07,190
+And quite often, this gap
+between these two things,
+
+390
+00:20:07,190 --> 00:20:09,320
+that's where the problem is.
+
+391
+00:20:09,320 --> 00:20:11,840
+And so if all you're
+getting is what
+
+392
+00:20:11,840 --> 00:20:13,760
+you think and say
+you're doing, it's
+
+393
+00:20:13,760 --> 00:20:15,950
+incredibly hard for
+someone else to maybe help
+
+394
+00:20:15,950 --> 00:20:17,540
+you troubleshoot things.
+
+395
+00:20:17,540 --> 00:20:21,680
+So by providing your minimal
+reproducible examples
+
+396
+00:20:21,680 --> 00:20:26,420
+as runnable code, you get
+rid of all sorts of opinions
+
+397
+00:20:26,420 --> 00:20:30,350
+people have about what's
+wrong, potential for vocabulary
+
+398
+00:20:30,350 --> 00:20:32,588
+confusion, where
+you say potato, I
+
+399
+00:20:32,588 --> 00:20:34,130
+say "potahto" and
+this sort of stuff.
+
+400
+00:20:34,130 --> 00:20:39,090
+And it's much easier to figure
+out what's actually going on.
+
+401
+00:20:39,090 --> 00:20:44,060
+So to turn back to minimal,
+when you're trying to figure out
+
+402
+00:20:44,060 --> 00:20:46,490
+what's going on in a
+confusing situation,
+
+403
+00:20:46,490 --> 00:20:48,830
+you can think of
+it as the classic
+
+404
+00:20:48,830 --> 00:20:52,080
+looking for a needle
+in a haystack exercise.
+
+405
+00:20:52,080 --> 00:20:53,990
+And so common sense
+would tell you
+
+406
+00:20:53,990 --> 00:20:56,470
+that if you could make
+that haystack smaller,
+
+407
+00:20:56,470 --> 00:20:58,790
+it's going to be a lot
+easier to find your needle.
+
+408
+00:20:58,790 --> 00:21:01,160
+And this is the basic
+principle behind why
+
+409
+00:21:01,160 --> 00:21:04,010
+making a reprex minimal
+is so important.
+
+410
+00:21:04,010 --> 00:21:06,740
+So your goal is to
+try to make the code
+
+411
+00:21:06,740 --> 00:21:10,380
+and the data as small
+and simple as possible.
+
+412
+00:21:10,380 --> 00:21:12,480
+And if you took
+anything else away,
+
+413
+00:21:12,480 --> 00:21:14,090
+it wouldn't be
+making your point,
+
+414
+00:21:14,090 --> 00:21:16,940
+or it wouldn't show the error.
+
+415
+00:21:16,940 --> 00:21:20,870
+So I'm going to show
+a wild-caught problem.
+
+416
+00:21:20,870 --> 00:21:25,250
+And this was kindly donated
+by Brooke Madubuonwu,
+
+417
+00:21:25,250 --> 00:21:26,810
+with her permission.
+
+418
+00:21:26,810 --> 00:21:30,710
+And so this was a problem
+she shared with me privately
+
+419
+00:21:30,710 --> 00:21:31,700
+at first.
+
+420
+00:21:31,700 --> 00:21:34,160
+And it's OK if you can't
+see all of this code.
+
+421
+00:21:34,160 --> 00:21:35,210
+It's kind of the point.
+
+422
+00:21:35,210 --> 00:21:40,610
+The meta point of this slide
+is that wild-caught puzzles
+
+423
+00:21:40,610 --> 00:21:42,340
+are complicated.
+
+424
+00:21:42,340 --> 00:21:45,020
+And so the main thing
+you want to know here
+
+425
+00:21:45,020 --> 00:21:47,420
+is that this is a little
+data ingest snippet.
+
+426
+00:21:47,420 --> 00:21:49,760
+It brings in a bunch
+of Excel worksheets
+
+427
+00:21:49,760 --> 00:21:53,180
+that come from a bunch
+of Excel workbooks,
+
+428
+00:21:53,180 --> 00:21:55,700
+brings everything in as a
+list of many, many, many data
+
+429
+00:21:55,700 --> 00:22:00,230
+frames, and then turns all
+the variables into character.
+
+430
+00:22:00,230 --> 00:22:03,350
+And then out of the bottom
+pops this completely mysterious
+
+431
+00:22:03,350 --> 00:22:05,570
+message, error,
+the dot, dot, dot
+
+432
+00:22:05,570 --> 00:22:07,230
+list does not contain
+three elements.
+
+433
+00:22:07,230 --> 00:22:11,030
+So it's not at all clear
+where in the pipeline
+
+434
+00:22:11,030 --> 00:22:14,882
+that's coming from or what
+she can actually do about it.
+
+435
+00:22:14,882 --> 00:22:16,340
+And the thing I
+want to show here--
+
+436
+00:22:16,340 --> 00:22:17,750
+and this was a
+legitimate problem
+
+437
+00:22:17,750 --> 00:22:19,100
+that needed to be solved.
+
+438
+00:22:19,100 --> 00:22:23,300
+But this is a wild-caught
+example, by definition,
+
+439
+00:22:23,300 --> 00:22:27,110
+probably uses private
+files that only you have.
+
+440
+00:22:27,110 --> 00:22:30,590
+In this case, she needs 10 lines
+of code to do what she's doing.
+
+441
+00:22:30,590 --> 00:22:33,890
+That's just the complexity
+of what she's doing,
+
+442
+00:22:33,890 --> 00:22:37,400
+eight functions from five
+different add-on packages.
+
+443
+00:22:37,400 --> 00:22:38,300
+So we chat a little.
+
+444
+00:22:38,300 --> 00:22:39,830
+And Brooke also
+goes off and sort
+
+445
+00:22:39,830 --> 00:22:41,660
+of ruthlessly minimizes things.
+
+446
+00:22:41,660 --> 00:22:45,560
+And eventually this surfaces
+as an issue on dplyr.
+
+447
+00:22:45,560 --> 00:22:48,500
+And by the time
+she was done, this
+
+448
+00:22:48,500 --> 00:22:50,930
+is what the reprex
+looked like that
+
+449
+00:22:50,930 --> 00:22:54,007
+enabled a coherent
+conversation to happen.
+
+450
+00:22:54,007 --> 00:22:56,090
+And it was really more
+about things were happening
+
+451
+00:22:56,090 --> 00:22:57,770
+in various packages,
+and we gradually
+
+452
+00:22:57,770 --> 00:23:00,210
+got a much better
+error message here.
+
+453
+00:23:00,210 --> 00:23:03,740
+But the key features are
+that we have inline data.
+
+454
+00:23:03,740 --> 00:23:06,170
+She defines the
+data frame there.
+
+455
+00:23:06,170 --> 00:23:10,670
+And she calls one function, so
+inline data, not private data,
+
+456
+00:23:10,670 --> 00:23:12,520
+2 lines of code, not 10.
+
+457
+00:23:12,520 --> 00:23:16,580
+It involves one package, not
+five, one function, not eight.
+
+458
+00:23:16,580 --> 00:23:19,610
+And this gets to the heart
+of matter much quickly.
+
+459
+00:23:19,610 --> 00:23:21,840
+So how do you actually do this?
+
+460
+00:23:21,840 --> 00:23:23,570
+And I would say one
+of the easiest places
+
+461
+00:23:23,570 --> 00:23:26,880
+to start is
+simplifying the data.
+
+462
+00:23:26,880 --> 00:23:31,990
+So if the data that created
+your problem is 500 rows,
+
+463
+00:23:31,990 --> 00:23:35,320
+why can't it have 499?
+
+464
+00:23:35,320 --> 00:23:36,760
+Why not 498?
+
+465
+00:23:36,760 --> 00:23:39,550
+Keep making it smaller,
+and you will gradually
+
+466
+00:23:39,550 --> 00:23:43,480
+reveal to yourself which
+features of that data frame
+
+467
+00:23:43,480 --> 00:23:47,080
+are important for
+showing the problem.
+
+468
+00:23:47,080 --> 00:23:50,150
+So a minimal reprex has
+small, simple inputs.
+
+469
+00:23:50,150 --> 00:23:53,380
+It's awesome if you can
+inline them and no calls
+
+470
+00:23:53,380 --> 00:23:57,340
+to packages or functions
+that aren't actually needed.
+
+471
+00:23:57,340 --> 00:23:59,440
+I watch a lot of
+the repositories
+
+472
+00:23:59,440 --> 00:24:01,000
+for R packages on GitHub.
+
+473
+00:24:01,000 --> 00:24:03,700
+And there's a certain
+type of notification.
+
+474
+00:24:03,700 --> 00:24:06,370
+Or actually, it's usually
+like 100 notifications
+
+475
+00:24:06,370 --> 00:24:10,630
+I get at once, when
+Hadley does issue triage.
+
+476
+00:24:10,630 --> 00:24:14,160
+And so one of the things
+he will do is he'll post--
+
+477
+00:24:14,160 --> 00:24:18,970
+and he always says it this way,
+slightly more minimal reprex.
+
+478
+00:24:18,970 --> 00:24:23,410
+So I actually did it GitHub
+search for that phrase
+
+479
+00:24:23,410 --> 00:24:26,050
+and went and looked at
+these issue threads.
+
+480
+00:24:26,050 --> 00:24:28,210
+And this is a sketchy
+diagram because I
+
+481
+00:24:28,210 --> 00:24:29,210
+like the way that looks.
+
+482
+00:24:29,210 --> 00:24:32,660
+But this is actually based
+on data in a ggplot2 figure.
+
+483
+00:24:32,660 --> 00:24:36,820
+And I counted the lines of
+code in Hadley's version
+
+484
+00:24:36,820 --> 00:24:39,410
+versus the original version.
+
+485
+00:24:39,410 --> 00:24:41,560
+And they are consistently
+a lot smaller.
+
+486
+00:24:41,560 --> 00:24:42,950
+And this is lines of code.
+
+487
+00:24:42,950 --> 00:24:46,240
+But this would apply to
+many measures of reprex
+
+488
+00:24:46,240 --> 00:24:48,800
+size, whatever that might mean.
+
+489
+00:24:48,800 --> 00:24:51,780
+And you might say, well,
+Jenny, that's great.
+
+490
+00:24:51,780 --> 00:24:55,090
+Hadley had special
+knowledge of these packages
+
+491
+00:24:55,090 --> 00:24:57,220
+and is maybe better
+at this than I am.
+
+492
+00:24:57,220 --> 00:24:59,153
+And that is possibly true.
+
+493
+00:24:59,153 --> 00:25:00,820
+But I think there's
+something else going
+
+494
+00:25:00,820 --> 00:25:05,680
+on that makes me want
+to still point out
+
+495
+00:25:05,680 --> 00:25:07,420
+how important this is.
+
+496
+00:25:07,420 --> 00:25:10,360
+And there are a lot of
+reasons to make a reprex.
+
+497
+00:25:10,360 --> 00:25:15,640
+But somehow the
+discipline of knowing
+
+498
+00:25:15,640 --> 00:25:18,730
+that you're preparing
+something to show other people
+
+499
+00:25:18,730 --> 00:25:22,060
+makes you get your
+ducks in a row.
+
+500
+00:25:22,060 --> 00:25:26,170
+And it also consistently
+forces you to minimize things.
+
+501
+00:25:26,170 --> 00:25:27,330
+And a lot of people--
+
+502
+00:25:27,330 --> 00:25:28,240
+the numbers vary.
+
+503
+00:25:28,240 --> 00:25:29,920
+I obviously made these up.
+
+504
+00:25:29,920 --> 00:25:32,602
+But a lot of people report
+that when they finally
+
+505
+00:25:32,602 --> 00:25:34,810
+decide that they're going
+to post something on GitHub
+
+506
+00:25:34,810 --> 00:25:40,060
+or Stack Overflow or RStudio's
+community site, 80% to 90%
+
+507
+00:25:40,060 --> 00:25:44,380
+of the time they solve their
+own problem because it just
+
+508
+00:25:44,380 --> 00:25:47,840
+got them working in
+a productive way.
+
+509
+00:25:47,840 --> 00:25:50,090
+And that won't
+happen every time.
+
+510
+00:25:50,090 --> 00:25:51,970
+And so when it doesn't
+happen, it still
+
+511
+00:25:51,970 --> 00:25:55,420
+means that you have this
+beautiful version of your pain
+
+512
+00:25:55,420 --> 00:25:57,550
+that you can post
+somewhere in a way
+
+513
+00:25:57,550 --> 00:25:59,770
+that other people are more
+likely to engage with it.
+
+514
+00:26:02,710 --> 00:26:04,358
+We're going to move
+on, in some sense,
+
+515
+00:26:04,358 --> 00:26:06,900
+to the heart of the talk, maybe
+what you thought it would be,
+
+516
+00:26:06,900 --> 00:26:09,647
+which is about proper debugging.
+
+517
+00:26:09,647 --> 00:26:11,980
+But I do want to say I think
+the two previous things are
+
+518
+00:26:11,980 --> 00:26:13,360
+actually incredibly important.
+
+519
+00:26:13,360 --> 00:26:15,070
+They don't feel
+like rocket science.
+
+520
+00:26:15,070 --> 00:26:18,735
+But they can prevent you from
+getting to this point a lot.
+
+521
+00:26:18,735 --> 00:26:20,860
+But so what if you haven't
+solved your own problem,
+
+522
+00:26:20,860 --> 00:26:23,900
+and no one steps forward
+to solve it for you?
+
+523
+00:26:23,900 --> 00:26:28,480
+You have no choice but
+to debug it yourself.
+
+524
+00:26:28,480 --> 00:26:31,570
+So I'm opening another
+poll that might
+
+525
+00:26:31,570 --> 00:26:33,610
+be a little bit
+mysterious to some of you.
+
+526
+00:26:36,130 --> 00:26:38,235
+And we'll talk about
+this again at the end.
+
+527
+00:26:38,235 --> 00:26:39,610
+So this will be
+open for a while.
+
+528
+00:26:39,610 --> 00:26:41,193
+But so I want to
+know if you have ever
+
+529
+00:26:41,193 --> 00:26:45,770
+gotten stuck R's debugger.
+
+530
+00:26:45,770 --> 00:26:48,740
+And answer this at will.
+
+531
+00:26:48,740 --> 00:26:51,430
+So this mood I
+want to set here is
+
+532
+00:26:51,430 --> 00:26:53,350
+that this is a pretty
+famous Far Side
+
+533
+00:26:53,350 --> 00:26:57,580
+cartoon about how
+we talk to our dogs,
+
+534
+00:26:57,580 --> 00:27:00,460
+where we express all these
+detailed emotions or detailed
+
+535
+00:27:00,460 --> 00:27:04,330
+instructions and we're pretty
+sure that all the dog hears
+
+536
+00:27:04,330 --> 00:27:06,900
+is, blah, blah, blah, blah,
+blah, blah, blah, Ginger.
+
+537
+00:27:06,900 --> 00:27:09,050
+Blah, blah, blah, blah, blah.
+
+538
+00:27:09,050 --> 00:27:15,070
+And I think a lot of us process
+error messages this way.
+
+539
+00:27:15,070 --> 00:27:19,300
+So this is a real error message.
+
+540
+00:27:19,300 --> 00:27:22,570
+It's going to strike fear in
+the hearts of those of you
+
+541
+00:27:22,570 --> 00:27:24,220
+who can actually read it.
+
+542
+00:27:24,220 --> 00:27:28,900
+It's the classic can't
+install R Java error message.
+
+543
+00:27:28,900 --> 00:27:34,210
+And instead of reading all of
+this detailed information that
+
+544
+00:27:34,210 --> 00:27:37,000
+might help you sort out
+exactly what went wrong,
+
+545
+00:27:37,000 --> 00:27:44,980
+I think a lot of us just
+see "error" "no" "failed"
+
+546
+00:27:44,980 --> 00:27:47,830
+and go back into this
+speculate-dither-and-fret
+
+547
+00:27:47,830 --> 00:27:49,690
+cycle.
+
+548
+00:27:49,690 --> 00:27:52,930
+So these proper debugging
+tools are nerdy,
+
+549
+00:27:52,930 --> 00:27:54,130
+and they're technical.
+
+550
+00:27:54,130 --> 00:27:58,420
+And you're going to have to push
+through big ugly error messages
+
+551
+00:27:58,420 --> 00:28:00,950
+or call stacks,
+but you can do it.
+
+552
+00:28:00,950 --> 00:28:02,650
+So I'm going to show
+you a small example
+
+553
+00:28:02,650 --> 00:28:06,070
+in this section
+of a function I've
+
+554
+00:28:06,070 --> 00:28:08,800
+written called fruit average.
+
+555
+00:28:08,800 --> 00:28:10,750
+So the type of
+input that it takes
+
+556
+00:28:10,750 --> 00:28:13,120
+is a data frame, where
+we have one column
+
+557
+00:28:13,120 --> 00:28:17,080
+for each piece of fruit and
+one row for different fruit
+
+558
+00:28:17,080 --> 00:28:18,170
+attributes.
+
+559
+00:28:18,170 --> 00:28:23,080
+So we know that a blackberry has
+4 calories, it weighs 9 grams,
+
+560
+00:28:23,080 --> 00:28:27,160
+and my personal rating
+on yumminess is 6.
+
+561
+00:28:27,160 --> 00:28:30,430
+And so when you pass that
+object to fruit average
+
+562
+00:28:30,430 --> 00:28:35,220
+and give it a pattern, it
+will find the matching columns
+
+563
+00:28:35,220 --> 00:28:38,625
+and average their attributes.
+
+564
+00:28:38,625 --> 00:28:40,000
+So that's what it
+looks like when
+
+565
+00:28:40,000 --> 00:28:42,430
+we're averaging two fruits.
+
+566
+00:28:42,430 --> 00:28:44,530
+What if I asked for melon?
+
+567
+00:28:44,530 --> 00:28:46,310
+Melon isn't in this data set.
+
+568
+00:28:46,310 --> 00:28:47,980
+So I get no fruits.
+
+569
+00:28:47,980 --> 00:28:49,940
+You could argue that--
+
+570
+00:28:49,940 --> 00:28:53,017
+found zero fruits-- like,
+portalization is really hard.
+
+571
+00:28:53,017 --> 00:28:54,850
+I didn't get to spend
+a lot of time on this.
+
+572
+00:28:54,850 --> 00:28:55,790
+So that's fine.
+
+573
+00:28:55,790 --> 00:29:00,700
+It's not beautiful, but it's
+fine for early edge case.
+
+574
+00:29:00,700 --> 00:29:02,120
+But here's a problem.
+
+575
+00:29:02,120 --> 00:29:05,112
+So if I ask for the fruits
+whose name contain black,
+
+576
+00:29:05,112 --> 00:29:06,820
+I thought maybe there'd
+be more than one,
+
+577
+00:29:06,820 --> 00:29:10,630
+blackberry, black currant.
+
+578
+00:29:10,630 --> 00:29:14,500
+I get a weird message,
+like found fruits.
+
+579
+00:29:14,500 --> 00:29:16,410
+And then I get an error.
+
+580
+00:29:16,410 --> 00:29:21,090
+And the error is about row
+means being applied to mini dat.
+
+581
+00:29:21,090 --> 00:29:23,450
+And I'm being told that
+x must be an array.
+
+582
+00:29:23,450 --> 00:29:26,230
+So I didn't call a rowMeans.
+
+583
+00:29:26,230 --> 00:29:28,000
+I didn't make mini dat.
+
+584
+00:29:28,000 --> 00:29:29,890
+I don't know who x is.
+
+585
+00:29:29,890 --> 00:29:34,830
+And so this is a common sort
+of confusion situation, where
+
+586
+00:29:34,830 --> 00:29:37,330
+you are going to have to slowly
+figure out what all of those
+
+587
+00:29:37,330 --> 00:29:38,070
+mean.
+
+588
+00:29:38,070 --> 00:29:40,640
+You're going to fiddle around
+in the bowels of fruit average
+
+589
+00:29:40,640 --> 00:29:41,890
+to figure out what's going on.
+
+590
+00:29:41,890 --> 00:29:44,710
+And does fruit
+average contain a bug?
+
+591
+00:29:44,710 --> 00:29:48,910
+Or did you somehow
+send unexpected data?
+
+592
+00:29:48,910 --> 00:29:51,820
+So when I thought about
+this part of the talk, which
+
+593
+00:29:51,820 --> 00:29:54,680
+is kind of hard to
+deliver in this setting,
+
+594
+00:29:54,680 --> 00:29:58,360
+because you can't all do
+exercises and whatnot,
+
+595
+00:29:58,360 --> 00:30:04,180
+I decided to take a tour
+through three modes of true R
+
+596
+00:30:04,180 --> 00:30:04,810
+debugging.
+
+597
+00:30:04,810 --> 00:30:06,190
+And I'm using a death metaphor.
+
+598
+00:30:06,190 --> 00:30:11,050
+I think it's accurate because we
+are talking about fatal errors.
+
+599
+00:30:11,050 --> 00:30:14,230
+So we're going to go through
+some things from the left side
+
+600
+00:30:14,230 --> 00:30:15,100
+to the right.
+
+601
+00:30:15,100 --> 00:30:18,250
+And they're basically in order
+of probably what you should try
+
+602
+00:30:18,250 --> 00:30:23,370
+and also in order of how
+much control you have.
+
+603
+00:30:23,370 --> 00:30:26,650
+So the least amount of control
+is the death certificate,
+
+604
+00:30:26,650 --> 00:30:29,830
+where you can just
+learn a few basic facts.
+
+605
+00:30:29,830 --> 00:30:33,970
+The next level up is you get
+to participate in an autopsy.
+
+606
+00:30:33,970 --> 00:30:37,240
+And you are actually allowed
+to examine the subject.
+
+607
+00:30:37,240 --> 00:30:40,660
+And then finally, if you
+haven't watched Game of Thrones,
+
+608
+00:30:40,660 --> 00:30:45,220
+this creature is re-animating
+a lot of dead people
+
+609
+00:30:45,220 --> 00:30:48,370
+to create an army, but
+the idea is of reanimation
+
+610
+00:30:48,370 --> 00:30:50,680
+or resuscitation.
+
+611
+00:30:50,680 --> 00:30:56,080
+So this is how I map these on
+to some classic R debugging
+
+612
+00:30:56,080 --> 00:30:56,860
+strategies.
+
+613
+00:30:56,860 --> 00:30:59,340
+And we're going to go
+through them in this order.
+
+614
+00:30:59,340 --> 00:31:04,110
+So trace back is your first
+line of defense, I guess,
+
+615
+00:31:04,110 --> 00:31:08,400
+where you can see what all was
+called on the way to death.
+
+616
+00:31:08,400 --> 00:31:11,490
+So it is very much like a death
+certificate, where you get some
+
+617
+00:31:11,490 --> 00:31:14,640
+rather spare facts.
+
+618
+00:31:14,640 --> 00:31:16,680
+If that doesn't allow you
+to solve your problem,
+
+619
+00:31:16,680 --> 00:31:19,020
+you might go a little
+bit more interventional.
+
+620
+00:31:19,020 --> 00:31:23,790
+And you can change the error
+option in R so that right
+
+621
+00:31:23,790 --> 00:31:25,710
+before the function
+exits-- like,
+
+622
+00:31:25,710 --> 00:31:27,900
+you're still on a
+one-way ticket out--
+
+623
+00:31:27,900 --> 00:31:33,050
+you can do an autopsy and
+inspect the call stack.
+
+624
+00:31:33,050 --> 00:31:37,620
+But you can't really change
+the past at this point.
+
+625
+00:31:37,620 --> 00:31:41,070
+Whereas if you use browser
+and related techniques,
+
+626
+00:31:41,070 --> 00:31:45,750
+you actually interrupt things
+before death is inevitable
+
+627
+00:31:45,750 --> 00:31:47,520
+and get a much
+better opportunity
+
+628
+00:31:47,520 --> 00:31:48,640
+to maybe fix things.
+
+629
+00:31:48,640 --> 00:31:51,100
+So we're going to
+go through these.
+
+630
+00:31:51,100 --> 00:31:54,900
+So if I call fruit average
+on our troublesome example,
+
+631
+00:31:54,900 --> 00:31:56,370
+I get the error.
+
+632
+00:31:56,370 --> 00:31:59,370
+You immediately would
+call trace back here.
+
+633
+00:31:59,370 --> 00:32:01,560
+And what you do is you read
+this from the bottom up,
+
+634
+00:32:01,560 --> 00:32:05,070
+and it shows you the sequence
+of calls that led to the error.
+
+635
+00:32:05,070 --> 00:32:07,680
+So you called fruit average.
+
+636
+00:32:07,680 --> 00:32:10,440
+Apparently somewhere inside
+fruit average, on line five,
+
+637
+00:32:10,440 --> 00:32:13,230
+in fact, rowMeans got called.
+
+638
+00:32:13,230 --> 00:32:16,740
+And somewhere inside
+rowMeans there was a stop.
+
+639
+00:32:16,740 --> 00:32:19,360
+So this is called
+the call stack.
+
+640
+00:32:19,360 --> 00:32:23,130
+And that's a term that applies
+across many, many languages.
+
+641
+00:32:23,130 --> 00:32:28,350
+In R, we summon it with
+the function trace back.
+
+642
+00:32:28,350 --> 00:32:30,415
+So when I decided
+to do this topic,
+
+643
+00:32:30,415 --> 00:32:32,790
+I thought I am finally going
+to get to the bottom of what
+
+644
+00:32:32,790 --> 00:32:35,700
+all those different terms mean.
+
+645
+00:32:35,700 --> 00:32:41,370
+And it turns out that you can
+take any two of those words,
+
+646
+00:32:41,370 --> 00:32:44,100
+and you can probably
+put them in any order.
+
+647
+00:32:44,100 --> 00:32:47,400
+And you will find some
+pocket of the R community
+
+648
+00:32:47,400 --> 00:32:51,300
+who uses that term except
+call back, which is real
+
+649
+00:32:51,300 --> 00:32:52,590
+and is totally different.
+
+650
+00:32:52,590 --> 00:32:55,200
+But you hear people talk about
+the call stack, the trace back,
+
+651
+00:32:55,200 --> 00:32:57,450
+the stack trace, and the
+back trace all the time,
+
+652
+00:32:57,450 --> 00:33:00,780
+and they all mean
+the same thing.
+
+653
+00:33:00,780 --> 00:33:06,450
+An alternative view that's
+coming for back traces
+
+654
+00:33:06,450 --> 00:33:07,890
+is from rlang.
+
+655
+00:33:07,890 --> 00:33:11,460
+So rlang is accumulating
+more and more functionality
+
+656
+00:33:11,460 --> 00:33:15,255
+for developers, really, for
+throwing classed errors.
+
+657
+00:33:16,080 --> 00:33:17,910
+But one of the
+things it also offers
+
+658
+00:33:17,910 --> 00:33:23,230
+is some new takes at how
+to present the call stack.
+
+659
+00:33:23,230 --> 00:33:26,010
+And that's the one
+part of that area
+
+660
+00:33:26,010 --> 00:33:28,800
+of rlang that might be
+relevant to just about anyone.
+
+661
+00:33:28,800 --> 00:33:30,870
+Mostly this is developer facing.
+
+662
+00:33:30,870 --> 00:33:33,840
+But this is an alternative
+view of that same call stack.
+
+663
+00:33:33,840 --> 00:33:37,740
+And it's in a different order,
+and there's some nice nesting.
+
+664
+00:33:37,740 --> 00:33:41,890
+And so this is being designed
+with readability in mind.
+
+665
+00:33:41,890 --> 00:33:44,550
+So if you like looking
+at call stacks this way,
+
+666
+00:33:44,550 --> 00:33:48,000
+there's something you can
+do in your startup file.
+
+667
+00:33:48,000 --> 00:33:50,250
+And if you like using
+RStudio, it also
+
+668
+00:33:50,250 --> 00:33:55,260
+has a really nice default
+method for how to handle errors.
+
+669
+00:33:55,260 --> 00:33:58,410
+And it will by default show
+you the base R trace back
+
+670
+00:33:58,410 --> 00:34:00,900
+and then also offer
+you an easy way
+
+671
+00:34:00,900 --> 00:34:04,000
+to get to some of the
+techniques that are coming next.
+
+672
+00:34:04,000 --> 00:34:06,420
+So that's trace back.
+
+673
+00:34:06,420 --> 00:34:08,460
+So the last two techniques
+I want to talk about
+
+674
+00:34:08,460 --> 00:34:13,650
+are the ones where you get to
+intervene, either intervene
+
+675
+00:34:13,650 --> 00:34:18,989
+post death in the autopsy
+or intervene even earlier.
+
+676
+00:34:18,989 --> 00:34:22,350
+And this is just a
+little video that I
+
+677
+00:34:22,350 --> 00:34:25,860
+think totally evokes what's
+going on or how it feels.
+
+678
+00:34:25,860 --> 00:34:29,820
+But you get to open
+this hidden door
+
+679
+00:34:29,820 --> 00:34:32,370
+and go into this
+whole world that has
+
+680
+00:34:32,370 --> 00:34:35,130
+a microwave and a refrigerator.
+
+681
+00:34:35,130 --> 00:34:37,679
+And you can you can
+certainly look at things,
+
+682
+00:34:37,679 --> 00:34:39,750
+and you might be able
+to do things in there.
+
+683
+00:34:39,750 --> 00:34:41,969
+That's how it feels
+to be in the debugger.
+
+684
+00:34:41,969 --> 00:34:44,699
+It's less charming,
+I have to say.
+
+685
+00:34:44,699 --> 00:34:47,429
+And then you come back
+out, close the door,
+
+686
+00:34:47,429 --> 00:34:50,250
+and hopefully that hidden world
+goes back to being hidden.
+
+687
+00:34:50,250 --> 00:34:52,020
+But that's kind
+of what's going on
+
+688
+00:34:52,020 --> 00:34:54,850
+in these next two techniques.
+
+689
+00:34:54,850 --> 00:34:56,400
+So if you decide
+that you actually
+
+690
+00:34:56,400 --> 00:35:00,870
+need to see the state of
+things at the time of an error,
+
+691
+00:35:00,870 --> 00:35:04,750
+you can set your error option
+to the recover function.
+
+692
+00:35:04,750 --> 00:35:08,550
+So right as you're on
+your way out the door,
+
+693
+00:35:08,550 --> 00:35:13,380
+execution will pause, and you're
+allowed to look at frames.
+
+694
+00:35:13,380 --> 00:35:16,260
+And those are the
+environments corresponding
+
+695
+00:35:16,260 --> 00:35:18,280
+to the different function calls.
+
+696
+00:35:18,280 --> 00:35:20,230
+So I'm going to pick one here.
+
+697
+00:35:20,230 --> 00:35:24,290
+I want to see what mini data is.
+
+698
+00:35:24,290 --> 00:35:30,540
+So we're in the usual
+interactive R console.
+
+699
+00:35:30,540 --> 00:35:33,420
+But you know things are special
+because the prompt contains
+
+700
+00:35:33,420 --> 00:35:38,220
+the word "browse" and 1, which
+tells us which frame we're in.
+
+701
+00:35:38,220 --> 00:35:40,530
+And you can print objects here.
+
+702
+00:35:40,530 --> 00:35:44,490
+But a lot of what people
+do here is they use ls
+
+703
+00:35:44,490 --> 00:35:47,310
+to see which objects exist.
+
+704
+00:35:47,310 --> 00:35:49,300
+Or in this case,
+I'm using ls.stir
+
+705
+00:35:49,300 --> 00:35:53,670
+stir to look at each
+object in the environment.
+
+706
+00:35:53,670 --> 00:35:56,850
+And I am particularly
+interested in mini dat
+
+707
+00:35:56,850 --> 00:35:58,620
+because I know it's my nemesis.
+
+708
+00:35:58,620 --> 00:36:01,492
+And I notice that it's
+an integer vector.
+
+709
+00:36:01,492 --> 00:36:02,950
+And I know from
+the error that it's
+
+710
+00:36:02,950 --> 00:36:05,350
+being sent to rowMeans,
+which I'm pretty sure needs
+
+711
+00:36:05,350 --> 00:36:06,880
+a two-dimensional object.
+
+712
+00:36:06,880 --> 00:36:08,860
+So I think many of
+you, your Spidey sense
+
+713
+00:36:08,860 --> 00:36:12,700
+is already telling you what
+the problem might be here.
+
+714
+00:36:12,700 --> 00:36:15,940
+If you do this recover
+work inside RStudio,
+
+715
+00:36:15,940 --> 00:36:19,930
+it's great because your usual
+environment pane is brought
+
+716
+00:36:19,930 --> 00:36:21,470
+to bear on this problem.
+
+717
+00:36:21,470 --> 00:36:24,700
+And you can be looking at
+the execution environments
+
+718
+00:36:24,700 --> 00:36:30,100
+of those functions in the normal
+beautiful environment viewer.
+
+719
+00:36:30,100 --> 00:36:33,220
+But let's say-- so now I have
+a theory about what's wrong.
+
+720
+00:36:33,220 --> 00:36:34,690
+I think the fact
+that this somehow
+
+721
+00:36:34,690 --> 00:36:37,420
+became a vector is my problem.
+
+722
+00:36:37,420 --> 00:36:40,340
+But now I want to
+sort of test that.
+
+723
+00:36:40,340 --> 00:36:43,600
+So the final most interventional
+thing you can possibly do
+
+724
+00:36:43,600 --> 00:36:45,290
+is we're going to use browser.
+
+725
+00:36:45,290 --> 00:36:48,640
+And so this last debugging
+mode is most powerful
+
+726
+00:36:48,640 --> 00:36:51,760
+if you actually have the
+source of the function
+
+727
+00:36:51,760 --> 00:36:52,960
+you're trying to work with.
+
+728
+00:36:52,960 --> 00:36:54,670
+There are ways to get
+here without that.
+
+729
+00:36:54,670 --> 00:36:57,550
+But it works best when you do
+because you'll have something
+
+730
+00:36:57,550 --> 00:37:00,100
+called source references.
+
+731
+00:37:00,100 --> 00:37:02,410
+So that was the first look
+you got at the actual source
+
+732
+00:37:02,410 --> 00:37:03,830
+of fruit average.
+
+733
+00:37:03,830 --> 00:37:07,480
+And what I do is I insert a
+call to the browser function
+
+734
+00:37:07,480 --> 00:37:09,640
+in the body of the function.
+
+735
+00:37:09,640 --> 00:37:13,210
+And you want to insert
+it before the error.
+
+736
+00:37:13,210 --> 00:37:14,710
+And if you knew
+where the error was,
+
+737
+00:37:14,710 --> 00:37:16,630
+we wouldn't be having
+this conversation.
+
+738
+00:37:16,630 --> 00:37:20,200
+So you often want to
+start high, and then you
+
+739
+00:37:20,200 --> 00:37:23,250
+can work it lower as you
+learn more about the problem.
+
+740
+00:37:23,250 --> 00:37:26,530
+So I'm putting it
+as the first line.
+
+741
+00:37:26,530 --> 00:37:28,270
+And there are, as
+I said, other ways
+
+742
+00:37:28,270 --> 00:37:31,690
+to get into a similar
+world that I simply
+
+743
+00:37:31,690 --> 00:37:33,760
+don't have time to cover.
+
+744
+00:37:33,760 --> 00:37:36,310
+So in the RStudio IDE--
+
+745
+00:37:36,310 --> 00:37:38,530
+again, you've got
+the source open--
+
+746
+00:37:38,530 --> 00:37:41,880
+you can set what's called
+an IDE break point.
+
+747
+00:37:41,880 --> 00:37:43,840
+And that's what
+that red dot means.
+
+748
+00:37:43,840 --> 00:37:45,490
+And then you're not
+editing your code.
+
+749
+00:37:45,490 --> 00:37:49,840
+So a lot of people find
+that a nicer workflow.
+
+750
+00:37:49,840 --> 00:37:53,000
+And if you don't have the
+source to a function--
+
+751
+00:37:53,000 --> 00:37:55,060
+maybe it's in a package
+owned by someone else,
+
+752
+00:37:55,060 --> 00:37:56,560
+and you haven't
+bothered to download
+
+753
+00:37:56,560 --> 00:37:58,780
+the source, or its base R--
+
+754
+00:37:58,780 --> 00:38:02,350
+you can use debug to get a
+fairly similar experience.
+
+755
+00:38:02,350 --> 00:38:05,020
+But it's a little more
+hampered by the fact
+
+756
+00:38:05,020 --> 00:38:08,610
+that you don't have
+the actual source.
+
+757
+00:38:08,610 --> 00:38:14,870
+So this is a little video of me
+live browsering this problem.
+
+758
+00:38:14,870 --> 00:38:19,420
+So first thing I do is I source
+a version of fruit average
+
+759
+00:38:19,420 --> 00:38:22,330
+that has that
+browser call in it.
+
+760
+00:38:22,330 --> 00:38:24,120
+Then I'm going to
+immediately call it
+
+761
+00:38:24,120 --> 00:38:27,130
+on my usual troublesome example.
+
+762
+00:38:27,130 --> 00:38:29,650
+And what you're going
+to see is I immediately
+
+763
+00:38:29,650 --> 00:38:33,340
+get kicked into this
+slightly different version
+
+764
+00:38:33,340 --> 00:38:36,010
+of the regular
+interactive R console.
+
+765
+00:38:36,010 --> 00:38:38,990
+And the browse thing
+will be in the prompt.
+
+766
+00:38:38,990 --> 00:38:42,790
+So I can use N now to
+go next line, next line.
+
+767
+00:38:42,790 --> 00:38:45,230
+And I'm walking
+through that function.
+
+768
+00:38:45,230 --> 00:38:48,260
+It might be someone else's
+function line by line.
+
+769
+00:38:48,260 --> 00:38:50,790
+And finally we get to mini dat.
+
+770
+00:38:50,790 --> 00:38:54,280
+So I'm going to inspect
+mini dat very exhaustively
+
+771
+00:38:54,280 --> 00:38:56,470
+and see what it looks like.
+
+772
+00:38:56,470 --> 00:38:59,710
+I'm going to see what its
+dimensions, which are null,
+
+773
+00:38:59,710 --> 00:39:02,560
+because it's a vector, and
+how many columns this has,
+
+774
+00:39:02,560 --> 00:39:05,720
+which is also null,
+because it's a vector.
+
+775
+00:39:05,720 --> 00:39:08,073
+And I'm pretty sure
+this is my problem.
+
+776
+00:39:08,073 --> 00:39:09,490
+But here's the
+cool thing that you
+
+777
+00:39:09,490 --> 00:39:11,950
+can't do in any
+other debugging mode,
+
+778
+00:39:11,950 --> 00:39:15,340
+is I can redefine mini dat.
+
+779
+00:39:15,340 --> 00:39:18,460
+And I'm going to do
+the same sub-setting.
+
+780
+00:39:18,460 --> 00:39:21,190
+But I'm going to specify
+drop equals false so
+
+781
+00:39:21,190 --> 00:39:23,140
+that even if I get
+just one column,
+
+782
+00:39:23,140 --> 00:39:25,960
+it's still going to be a
+two-dimensional object.
+
+783
+00:39:25,960 --> 00:39:28,270
+I check the dimensions again.
+
+784
+00:39:28,270 --> 00:39:31,690
+And then I can
+resume at execution.
+
+785
+00:39:31,690 --> 00:39:34,300
+And I'm going to get the error--
+the message I should see.
+
+786
+00:39:34,300 --> 00:39:37,060
+And I'm going to get
+the result I should see.
+
+787
+00:39:37,060 --> 00:39:39,640
+And so this is how
+you sort of test
+
+788
+00:39:39,640 --> 00:39:43,090
+a theory or pilot a
+solution to what you think
+
+789
+00:39:43,090 --> 00:39:44,840
+might be going wrong.
+
+790
+00:39:44,840 --> 00:39:46,120
+So that's what using browser--
+
+791
+00:39:46,120 --> 00:39:48,640
+and there's different ways
+to get into this world--
+
+792
+00:39:48,640 --> 00:39:50,960
+looks like.
+
+793
+00:39:50,960 --> 00:39:54,160
+So to conclude this
+section, every time
+
+794
+00:39:54,160 --> 00:39:58,180
+I've talked about this before,
+people come up to me afterwards
+
+795
+00:39:58,180 --> 00:39:59,110
+to talk about this.
+
+796
+00:39:59,110 --> 00:40:00,652
+They're like, it
+must be in the talk.
+
+797
+00:40:00,652 --> 00:40:01,775
+It has to be at the talk.
+
+798
+00:40:01,775 --> 00:40:04,150
+So it's very easy-- and I
+certainly have experienced this
+
+799
+00:40:04,150 --> 00:40:04,720
+myself--
+
+800
+00:40:04,720 --> 00:40:05,740
+to be in the browser.
+
+801
+00:40:05,740 --> 00:40:07,320
+You think you're really clever.
+
+802
+00:40:07,320 --> 00:40:09,040
+I'm going to upgrade
+my debugging skills.
+
+803
+00:40:09,040 --> 00:40:11,630
+And you don't know how
+to get back out of it.
+
+804
+00:40:11,630 --> 00:40:13,690
+So you will never remember this.
+
+805
+00:40:13,690 --> 00:40:17,590
+But it's capital Q.
+If you're in RStudio,
+
+806
+00:40:17,590 --> 00:40:21,820
+there's also a helpful button,
+a Stop button with a square that
+
+807
+00:40:21,820 --> 00:40:23,650
+will get you out of it.
+
+808
+00:40:23,650 --> 00:40:25,630
+You'll eventually learn.
+
+809
+00:40:25,630 --> 00:40:28,890
+And then two things that are
+more proactive to know about
+
+810
+00:40:28,890 --> 00:40:32,080
+is if you've used
+debug on a function,
+
+811
+00:40:32,080 --> 00:40:34,720
+it means every time
+you execute you're
+
+812
+00:40:34,720 --> 00:40:38,020
+going to get kicked
+back into the browser,
+
+813
+00:40:38,020 --> 00:40:42,920
+un-debug on the same function
+as how you cancel this behavior.
+
+814
+00:40:42,920 --> 00:40:45,580
+And some people have been
+burned by this so badly so
+
+815
+00:40:45,580 --> 00:40:48,010
+many times that they have
+a policy of only using
+
+816
+00:40:48,010 --> 00:40:49,660
+debug once.
+
+817
+00:40:49,660 --> 00:40:52,720
+And what it does is it will
+send you into this environment
+
+818
+00:40:52,720 --> 00:40:56,650
+browser exactly
+once, the first time
+
+819
+00:40:56,650 --> 00:40:59,300
+you hit that point
+and then never again.
+
+820
+00:40:59,300 --> 00:41:01,980
+So it's sort of
+self-destructing.
+
+821
+00:41:01,980 --> 00:41:04,920
+So those are all
+good to know about.
+
+822
+00:41:04,920 --> 00:41:08,340
+Our last section is
+more future facing.
+
+823
+00:41:08,340 --> 00:41:11,190
+And it's how do you create
+your projects in a way
+
+824
+00:41:11,190 --> 00:41:14,380
+that they are less
+hospitable to bugs.
+
+825
+00:41:14,380 --> 00:41:16,440
+And when things go wrong,
+because, of course,
+
+826
+00:41:16,440 --> 00:41:19,980
+they're going to, you're giving
+yourself more information
+
+827
+00:41:19,980 --> 00:41:22,270
+to help you solve it.
+
+828
+00:41:22,270 --> 00:41:25,800
+So if you fixed something once,
+or you've seen some weird edge
+
+829
+00:41:25,800 --> 00:41:29,160
+behavior that causes
+all hell to break loose,
+
+830
+00:41:29,160 --> 00:41:32,500
+do something to make sure
+that that stays fixed.
+
+831
+00:41:32,500 --> 00:41:34,410
+And these tips are
+increasingly going
+
+832
+00:41:34,410 --> 00:41:36,780
+to be more packaged
+development focused.
+
+833
+00:41:36,780 --> 00:41:39,338
+Although some of it is
+relevant to scripts.
+
+834
+00:41:39,338 --> 00:41:41,130
+But so based on the
+example we just worked,
+
+835
+00:41:41,130 --> 00:41:44,550
+like a fruit average was
+in a package I maintain.
+
+836
+00:41:44,550 --> 00:41:47,730
+Once I make that fix,
+drop equals false,
+
+837
+00:41:47,730 --> 00:41:51,180
+I also add this
+test to make sure
+
+838
+00:41:51,180 --> 00:41:52,680
+that the behavior
+is what it should
+
+839
+00:41:52,680 --> 00:41:58,380
+be when we have zero fruits, one
+fruit, and two fruits matching.
+
+840
+00:41:58,380 --> 00:42:02,160
+And so for people working
+with data analysis and a data
+
+841
+00:42:02,160 --> 00:42:04,890
+script, this is
+another hypothetical.
+
+842
+00:42:04,890 --> 00:42:07,320
+Like, let's imagine you're
+importing fruit data
+
+843
+00:42:07,320 --> 00:42:09,200
+on a regular basis.
+
+844
+00:42:09,200 --> 00:42:10,940
+And somewhere down
+in the pipeline
+
+845
+00:42:10,940 --> 00:42:14,570
+there's an implicit assumption
+that everything's numeric.
+
+846
+00:42:14,570 --> 00:42:18,330
+And maybe you've been burned
+by having things unexpectedly
+
+847
+00:42:18,330 --> 00:42:20,550
+import as character.
+
+848
+00:42:20,550 --> 00:42:23,400
+Once you've spent a
+half day debugging that,
+
+849
+00:42:23,400 --> 00:42:27,060
+you should add an assertion in
+your pipeline so that the next
+
+850
+00:42:27,060 --> 00:42:29,970
+time that happens-- because
+you probably can't prevent it--
+
+851
+00:42:29,970 --> 00:42:33,210
+you at least know very early,
+and you have a really excellent
+
+852
+00:42:33,210 --> 00:42:35,755
+error message for yourself.
+
+853
+00:42:35,755 --> 00:42:37,380
+So over time you're
+going to accumulate
+
+854
+00:42:37,380 --> 00:42:41,070
+lots of these sorts of checks
+on whether you make a data
+
+855
+00:42:41,070 --> 00:42:43,410
+pipeline or on a package.
+
+856
+00:42:43,410 --> 00:42:48,870
+And so you want to be running
+them en masse and really often.
+
+857
+00:42:48,870 --> 00:42:52,110
+So two great big collections
+of checks that you could be
+
+858
+00:42:52,110 --> 00:42:54,840
+running-- and this is
+definitely about packages now--
+
+859
+00:42:54,840 --> 00:42:58,260
+is R command check
+itself will show you
+
+860
+00:42:58,260 --> 00:43:01,200
+if your package is meeting
+all the various criteria
+
+861
+00:43:01,200 --> 00:43:03,210
+enforced by CRAN.
+
+862
+00:43:03,210 --> 00:43:05,540
+And for the vast
+majority of those,
+
+863
+00:43:05,540 --> 00:43:07,350
+it's a standard
+you want to meet,
+
+864
+00:43:07,350 --> 00:43:09,990
+whether you're going to put
+your package on CRAN or not,
+
+865
+00:43:09,990 --> 00:43:12,780
+and something you'd want
+to run really often.
+
+866
+00:43:12,780 --> 00:43:14,670
+And then you're going
+to have custom tests,
+
+867
+00:43:14,670 --> 00:43:17,430
+like the one I just showed
+you, that uniquely tests
+
+868
+00:43:17,430 --> 00:43:19,380
+the functionality of your work.
+
+869
+00:43:19,380 --> 00:43:21,090
+So our group uses
+a package called
+
+870
+00:43:21,090 --> 00:43:25,440
+testthat to express those
+and to sort of choreograph
+
+871
+00:43:25,440 --> 00:43:27,060
+the running of them.
+
+872
+00:43:27,060 --> 00:43:29,790
+And when you set that up,
+you can run just them.
+
+873
+00:43:29,790 --> 00:43:33,000
+And then it's also wired up
+that those will run every time
+
+874
+00:43:33,000 --> 00:43:34,650
+R command check is done.
+
+875
+00:43:34,650 --> 00:43:38,100
+And this means you're
+much more likely to run
+
+876
+00:43:38,100 --> 00:43:39,360
+all of your tests.
+
+877
+00:43:39,360 --> 00:43:42,840
+And the sooner you learn
+that you broke something,
+
+878
+00:43:42,840 --> 00:43:46,770
+the easier it is to fix it
+because usually the delta is
+
+879
+00:43:46,770 --> 00:43:50,220
+smaller and you're looking
+in a smaller haystack.
+
+880
+00:43:50,220 --> 00:43:53,550
+If you only run R command
+check every 10 months,
+
+881
+00:43:53,550 --> 00:43:57,990
+you've made a very big
+haystack to look through.
+
+882
+00:43:57,990 --> 00:44:01,290
+And then the next level
+up is to run those checks
+
+883
+00:44:01,290 --> 00:44:04,930
+not on your machine,
+but on their machine.
+
+884
+00:44:04,930 --> 00:44:06,690
+And that pretty
+much means that you
+
+885
+00:44:06,690 --> 00:44:09,960
+have to be using a whole
+other set of practices that
+
+886
+00:44:09,960 --> 00:44:13,860
+are beyond this talk, but
+that you are keeping your code
+
+887
+00:44:13,860 --> 00:44:18,420
+under version control, pushing
+it to a remote version control
+
+888
+00:44:18,420 --> 00:44:22,610
+host, like a GitHub or
+a GitLab or a BitBucket.
+
+889
+00:44:22,610 --> 00:44:25,350
+And you'll use something
+called continuous integration.
+
+890
+00:44:25,350 --> 00:44:28,560
+And every time you make a
+change, it will kick off,
+
+891
+00:44:28,560 --> 00:44:33,120
+running R command check, which
+includes your test, preferably
+
+892
+00:44:33,120 --> 00:44:35,680
+over many different
+operating systems.
+
+893
+00:44:35,680 --> 00:44:38,610
+So you get extra credit
+here if you are running it
+
+894
+00:44:38,610 --> 00:44:41,160
+on different operating systems.
+
+895
+00:44:41,160 --> 00:44:45,190
+And again, this just means
+that you find errors sooner,
+
+896
+00:44:45,190 --> 00:44:48,060
+when they're easier to fix.
+
+897
+00:44:48,060 --> 00:44:53,650
+This last-- this particular
+point is extremely personal.
+
+898
+00:44:53,650 --> 00:44:57,090
+So I have found that
+there are certain patterns
+
+899
+00:44:57,090 --> 00:45:02,190
+I will use inside a function
+or certain data structures that
+
+900
+00:45:02,190 --> 00:45:08,640
+later prove to be very enriched
+for bugs, like bug magnets.
+
+901
+00:45:08,640 --> 00:45:12,030
+And when I have to
+go back in and tinker
+
+902
+00:45:12,030 --> 00:45:15,120
+with that piece of
+code, I hate it.
+
+903
+00:45:15,120 --> 00:45:22,170
+So for me, it's recursion and
+high-dimensional data arrays,
+
+904
+00:45:22,170 --> 00:45:24,360
+like big dimensional data cubes.
+
+905
+00:45:25,050 --> 00:45:27,180
+So if you need that
+abstraction to solve
+
+906
+00:45:27,180 --> 00:45:31,270
+your problem, absolutely, of
+course, you should leave it in.
+
+907
+00:45:31,270 --> 00:45:33,090
+But if I'm honest with
+myself, sometimes I
+
+908
+00:45:33,090 --> 00:45:37,530
+did this because I could.
+
+909
+00:45:37,530 --> 00:45:40,170
+And both of these
+things, I find, make
+
+910
+00:45:40,170 --> 00:45:41,850
+perfect sense when
+you've been thinking
+
+911
+00:45:41,850 --> 00:45:44,790
+about nothing but that
+problem for three days.
+
+912
+00:45:44,790 --> 00:45:46,800
+And it just-- it's so elegant.
+
+913
+00:45:46,800 --> 00:45:47,700
+And then you go away.
+
+914
+00:45:47,700 --> 00:45:50,790
+And six months later, this
+is where the bug will be.
+
+915
+00:45:50,790 --> 00:45:52,890
+It is not so elegant anymore.
+
+916
+00:45:52,890 --> 00:45:58,470
+It takes a long time to upload
+all of that back into your RAM.
+
+917
+00:45:58,470 --> 00:46:01,680
+And so I find that if you have
+some pattern like that where
+
+918
+00:46:01,680 --> 00:46:03,450
+you kick yourself
+for using it when
+
+919
+00:46:03,450 --> 00:46:08,610
+you could have done something
+simpler, stop doing that.
+
+920
+00:46:08,610 --> 00:46:12,570
+Here's a Douglas
+Adams quote that I
+
+921
+00:46:12,570 --> 00:46:15,870
+think has a lot of relevance
+to building data packages.
+
+922
+00:46:15,870 --> 00:46:18,750
+"The major difference between
+a thing that might go wrong
+
+923
+00:46:18,750 --> 00:46:23,370
+and a thing that cannot possibly
+go wrong is that when the thing
+
+924
+00:46:23,370 --> 00:46:27,210
+that cannot possibly goes wrong,
+it's impossible to get out
+
+925
+00:46:27,210 --> 00:46:29,050
+and repair."
+
+926
+00:46:29,050 --> 00:46:31,140
+And so the idea I want
+to talk about here
+
+927
+00:46:31,140 --> 00:46:33,360
+is that as you're
+building things,
+
+928
+00:46:33,360 --> 00:46:37,440
+you will be so happy later
+if you've left yourself
+
+929
+00:46:37,440 --> 00:46:40,410
+some kind of an access panel.
+
+930
+00:46:40,410 --> 00:46:42,420
+And in this case,
+there's a valve here
+
+931
+00:46:42,420 --> 00:46:45,385
+that you can go in and
+turn off or up or down.
+
+932
+00:46:45,385 --> 00:46:47,760
+And I'm not going to go through
+all of the examples here.
+
+933
+00:46:47,760 --> 00:46:51,450
+But I'm going through several
+packages near and dear to me.
+
+934
+00:46:51,450 --> 00:46:54,540
+And I'm also showing an
+example from base R, where
+
+935
+00:46:54,540 --> 00:46:58,800
+if you're trying to
+debug Excel import
+
+936
+00:46:58,800 --> 00:47:01,860
+or making HTTP calls
+or some sort of harry
+
+937
+00:47:01,860 --> 00:47:07,530
+nonstandard evaluation problem,
+you have a way to flip a switch
+
+938
+00:47:07,530 --> 00:47:11,290
+and suddenly be getting
+a lot more information.
+
+939
+00:47:11,290 --> 00:47:13,680
+And this is great for
+package developers.
+
+940
+00:47:13,680 --> 00:47:15,870
+It's very useful
+during development.
+
+941
+00:47:15,870 --> 00:47:20,040
+And then also when you're trying
+to help a user debug something
+
+942
+00:47:20,040 --> 00:47:22,800
+and you're having that sort
+of vocabulary communication
+
+943
+00:47:22,800 --> 00:47:28,760
+problem, you can ask them,
+open the access panel,
+
+944
+00:47:28,760 --> 00:47:31,560
+run your problem, and send you
+a lot more information that
+
+945
+00:47:31,560 --> 00:47:34,260
+might help you get unstuck.
+
+946
+00:47:34,260 --> 00:47:38,320
+My last point is about
+writing error messages.
+
+947
+00:47:38,320 --> 00:47:41,710
+So we've come back
+to where we started,
+
+948
+00:47:41,710 --> 00:47:44,040
+which is with the world--
+
+949
+00:47:44,040 --> 00:47:47,190
+or R's most famous error
+message, object of type closure
+
+950
+00:47:47,190 --> 00:47:48,450
+is not subsettable.
+
+951
+00:47:48,450 --> 00:47:50,790
+My theory is that the
+reason this sends people
+
+952
+00:47:50,790 --> 00:47:54,450
+for such a loop is
+the word closure
+
+953
+00:47:54,450 --> 00:47:56,650
+and that a lot of people
+don't know what that means.
+
+954
+00:47:56,650 --> 00:48:02,130
+So we could also, in most cases,
+use the word function there.
+
+955
+00:48:02,130 --> 00:48:03,900
+I'm not sure if that
+would immediately
+
+956
+00:48:03,900 --> 00:48:05,790
+make everyone love this
+error message, like,
+
+957
+00:48:05,790 --> 00:48:07,290
+I totally know what to do now.
+
+958
+00:48:07,290 --> 00:48:08,610
+I can fix my problem.
+
+959
+00:48:08,610 --> 00:48:14,600
+But I think it removes
+one communication barrier.
+
+960
+00:48:14,600 --> 00:48:17,550
+In the Tidyverse,
+we've been trying
+
+961
+00:48:17,550 --> 00:48:20,340
+to create some sort of
+standard for ourselves
+
+962
+00:48:20,340 --> 00:48:25,530
+for error messages where we
+return as much information
+
+963
+00:48:25,530 --> 00:48:29,610
+as we have, like where
+the error occurred,
+
+964
+00:48:29,610 --> 00:48:31,500
+the name of the object
+involved if we're
+
+965
+00:48:31,500 --> 00:48:35,250
+pretty sure we have that
+right, and maybe even a hint.
+
+966
+00:48:35,250 --> 00:48:40,230
+So this is a much more
+controversial version
+
+967
+00:48:40,230 --> 00:48:43,320
+of object of closure
+is not subsettable,
+
+968
+00:48:43,320 --> 00:48:47,460
+where we say I can't
+subset a function for you.
+
+969
+00:48:47,460 --> 00:48:50,190
+Have you've forgotten to
+define a variable named df?
+
+970
+00:48:50,190 --> 00:48:53,610
+So this is the type of
+hint we give sometimes.
+
+971
+00:48:53,610 --> 00:48:56,760
+It's extremely dangerous,
+though, because people really
+
+972
+00:48:56,760 --> 00:48:58,500
+trust you.
+
+973
+00:48:58,500 --> 00:49:01,170
+And if you're wrong,
+it gets really
+
+974
+00:49:01,170 --> 00:49:03,390
+difficult to predict
+all the different ways
+
+975
+00:49:03,390 --> 00:49:04,950
+people can get an error message.
+
+976
+00:49:04,950 --> 00:49:07,158
+If you're wrong, you're
+going to send a lot of people
+
+977
+00:49:07,158 --> 00:49:08,550
+on a wild goose chase.
+
+978
+00:49:08,550 --> 00:49:12,120
+So I'm not sure that this error
+is really amenable to this.
+
+979
+00:49:12,120 --> 00:49:15,960
+But a much cleaner
+example is from dplyr.
+
+980
+00:49:15,960 --> 00:49:18,750
+So dplyr has a
+function called filter,
+
+981
+00:49:18,750 --> 00:49:22,080
+where you can ask for just
+certain rows in a data set.
+
+982
+00:49:22,080 --> 00:49:25,260
+And it's very easy to use
+the single equals sign
+
+983
+00:49:25,260 --> 00:49:28,410
+when you want the logical
+double equals sign.
+
+984
+00:49:28,410 --> 00:49:32,790
+And apparently enough people
+have fallen down this pothole
+
+985
+00:49:32,790 --> 00:49:35,820
+that the dplyr maintainers
+have had mercy on all of us.
+
+986
+00:49:35,820 --> 00:49:39,630
+And it's pretty clear what
+people mean to suggest,
+
+987
+00:49:39,630 --> 00:49:42,240
+maybe you need to be using
+the double equals sign.
+
+988
+00:49:42,240 --> 00:49:45,510
+So I think of all the error
+messages that have hints,
+
+989
+00:49:45,510 --> 00:49:46,560
+this is my favorite.
+
+990
+00:49:46,560 --> 00:49:51,363
+And it's the one that
+has helped me the most.
+
+991
+00:49:51,363 --> 00:49:52,780
+So that brings us
+to the end here.
+
+992
+00:49:52,780 --> 00:49:57,310
+I'm going to review your
+troubleshooting blueprint.
+
+993
+00:49:57,310 --> 00:49:58,900
+So something weird happens.
+
+994
+00:49:58,900 --> 00:50:01,240
+I think the very first
+thing you should do
+
+995
+00:50:01,240 --> 00:50:03,280
+is turn it off and
+turn it on again.
+
+996
+00:50:03,280 --> 00:50:07,240
+You'll be amazed how often
+your problem is gone.
+
+997
+00:50:07,240 --> 00:50:10,840
+If it's not gone,
+try to make a reprex.
+
+998
+00:50:10,840 --> 00:50:14,170
+Pretend like you're going to
+send it out into the world,
+
+999
+00:50:14,170 --> 00:50:15,710
+and you need to minimize it.
+
+1000
+00:50:15,710 --> 00:50:18,580
+You need to write a clean
+self-contained version.
+
+1001
+00:50:18,580 --> 00:50:21,400
+Again, you will be
+amazed how often
+
+1002
+00:50:21,400 --> 00:50:25,150
+that process gets
+you unstuck and leads
+
+1003
+00:50:25,150 --> 00:50:27,640
+to a productive solution.
+
+1004
+00:50:27,640 --> 00:50:31,390
+If that doesn't work, you will
+have to dig into the error.
+
+1005
+00:50:31,390 --> 00:50:34,330
+And I really think using
+the proper debugging
+
+1006
+00:50:34,330 --> 00:50:36,200
+tools is very useful.
+
+1007
+00:50:36,200 --> 00:50:41,060
+And I know that I put off
+that day way too long.
+
+1008
+00:50:41,060 --> 00:50:43,450
+So if they look kind
+of intimidating,
+
+1009
+00:50:43,450 --> 00:50:46,810
+I suggest that you time box it.
+
+1010
+00:50:46,810 --> 00:50:48,820
+So maybe say the
+next time I come up
+
+1011
+00:50:48,820 --> 00:50:51,350
+with one of these
+weird situations,
+
+1012
+00:50:51,350 --> 00:50:55,630
+I'm going to fiddle around
+with these trace back, recover,
+
+1013
+00:50:55,630 --> 00:50:58,520
+and browser for 10 minutes.
+
+1014
+00:50:58,520 --> 00:51:00,250
+And if I haven't
+really gotten anywhere,
+
+1015
+00:51:00,250 --> 00:51:03,760
+I have permission to quit
+and go back to my old ways.
+
+1016
+00:51:03,760 --> 00:51:05,530
+And I think you'll
+find that with just
+
+1017
+00:51:05,530 --> 00:51:09,100
+a little bit of usage, you get
+a lot better, much more quickly.
+
+1018
+00:51:09,100 --> 00:51:11,750
+And then finally plan
+for the unexpected.
+
+1019
+00:51:11,750 --> 00:51:16,120
+So you are clearly going to be
+debugging everything you build.
+
+1020
+00:51:16,120 --> 00:51:18,210
+I'm sorry to tell you that.
+
+1021
+00:51:18,210 --> 00:51:20,890
+And so you might as well
+build it in such a way
+
+1022
+00:51:20,890 --> 00:51:24,490
+that when it fails, it
+fails informatively.
+
+1023
+00:51:24,490 --> 00:51:27,560
+When you break things,
+you learn quickly.
+
+1024
+00:51:27,560 --> 00:51:30,220
+And again, just make it easier
+to recover from the bugs that
+
+1025
+00:51:30,220 --> 00:51:32,597
+will inevitably come up.
+
+1026
+00:51:32,597 --> 00:51:34,180
+So there's the short
+link again if you
+
+1027
+00:51:34,180 --> 00:51:38,553
+want to see more links about
+the talk, get the slides.
+
+1028
+00:51:38,553 --> 00:51:39,470
+They're kind of large.
+
+1029
+00:51:39,470 --> 00:51:42,970
+So I would recommend that you
+look at them on Speaker Deck.
+
+1030
+00:51:42,970 --> 00:51:46,330
+But I really want to give
+big thanks to two people,
+
+1031
+00:51:46,330 --> 00:51:47,290
+virtual people.
+
+1032
+00:51:47,290 --> 00:51:50,350
+First, the Tidyverse
+team has listened to me
+
+1033
+00:51:50,350 --> 00:51:53,920
+practice parts of this
+talk for many, many months.
+
+1034
+00:51:53,920 --> 00:51:56,230
+And I have to say
+that we actually
+
+1035
+00:51:56,230 --> 00:51:59,830
+learned a lot about
+debugging from each other
+
+1036
+00:51:59,830 --> 00:52:05,050
+based on these every two or
+three week conversations.
+
+1037
+00:52:05,050 --> 00:52:06,700
+And part of why I
+want to say that
+
+1038
+00:52:06,700 --> 00:52:10,450
+is a lot of this stuff
+maybe feels a bit exotic,
+
+1039
+00:52:10,450 --> 00:52:12,550
+especially the
+debugging section.
+
+1040
+00:52:12,550 --> 00:52:16,600
+And just let it be known that
+people on the Tidyverse team
+
+1041
+00:52:16,600 --> 00:52:18,970
+learn things by talking
+to each other about this.
+
+1042
+00:52:18,970 --> 00:52:21,670
+Not everything we talked
+about makes it into the talk.
+
+1043
+00:52:21,670 --> 00:52:22,540
+It's more technical.
+
+1044
+00:52:22,540 --> 00:52:26,200
+But people don't talk about
+this enough, I've decided.
+
+1045
+00:52:26,200 --> 00:52:29,108
+And people have cool
+tricks to share with you.
+
+1046
+00:52:29,108 --> 00:52:31,150
+And finally, I want to
+thank Christine Kuper, who
+
+1047
+00:52:31,150 --> 00:52:34,660
+created the beautiful
+visual design for this talk.
+
+1048
+00:52:34,660 --> 00:52:37,030
+And without further ado,
+thank you very much.
+
+1049
+00:52:37,030 --> 00:52:40,380
+[APPLAUSE]

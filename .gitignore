@@ -1,5 +1,7 @@
 .Rproj.user
 .Rhistory
 .RData
-key
 kth
+key/*
+!key/
+!key/captions.srt
