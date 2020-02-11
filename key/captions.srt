@@ -61,12 +61,12 @@ What They Forgot to Teach You.
 14
 00:00:45,218 --> 00:00:47,260
 Or perhaps it's because
-you're afraid that you'll
+you're afraid that she'll
 
 15
 00:00:47,260 --> 00:00:51,910
 set your computer on fire
-because you said "wd."
+because you  "setwd()".
 
 16
 00:00:51,910 --> 00:00:56,050
@@ -315,7 +315,7 @@ to blog about this talk later.
 67
 00:03:41,590 --> 00:03:45,437
 But I am using Slido
-Live for some polls.
+live for some polls.
 
 68
 00:03:45,437 --> 00:03:47,770
@@ -359,7 +359,7 @@ important, the drudgery part.
 
 76
 00:04:06,760 --> 00:04:10,270
-So we don't give a name to these
+So, we don't give a name to these
 things and give them dignity.
 
 77
@@ -577,7 +577,7 @@ my commitment
 122
 00:06:15,190 --> 00:06:17,860
 to how important
-the idea of resets
+the idea of resets is
 
 123
 00:06:17,860 --> 00:06:21,370
@@ -735,7 +735,7 @@ and installing packages
 155
 00:07:51,337 --> 00:07:53,420
 while they're doing work
-in R, and especially they
+in R, and especially if they
 
 156
 00:07:53,420 --> 00:07:56,560
@@ -884,8 +884,8 @@ command line flags,
 
 187
 00:09:18,280 --> 00:09:22,560
-including no save
-and no restore data.
+including --no-save
+and --no-restore-data.
 
 188
 00:09:22,560 --> 00:09:24,220
@@ -905,7 +905,7 @@ this on my computer
 191
 00:09:29,200 --> 00:09:34,600
 from previous years, where
-people use rm list equals ls.
+people use rm(list = ls()).
 
 192
 00:09:34,600 --> 00:09:37,750
@@ -962,7 +962,7 @@ some sort of effect.
 203
 00:10:05,800 --> 00:10:10,930
 And then let's say you execute
-this command rm list equals ls.
+this command rm(list = ls()).
 
 204
 00:10:10,930 --> 00:10:16,090
@@ -1029,13 +1029,13 @@ do the big reveal.
 
 218
 00:11:31,200 --> 00:11:37,350
-So library dplyr
+So library(dplyr)
 leaves dplyr attached.
 
 219
 00:11:37,350 --> 00:11:42,720
 So that persists after
-rm list equal ls.
+rm(list = ls()).
 
 220
 00:11:42,720 --> 00:11:45,810
@@ -1044,7 +1044,7 @@ function, that's been cleared.
 
 221
 00:11:45,810 --> 00:11:49,920
-So you have a free set summary
+So you have reset summary()
 to its normal definition.
 
 222
@@ -1086,7 +1086,7 @@ to the name x, that's gone.
 
 230
 00:12:07,860 --> 00:12:09,270
-X is gone.
+x is gone.
 
 231
 00:12:09,270 --> 00:12:11,940
@@ -1197,7 +1197,7 @@ from the cloud and VM
 
 253
 00:13:19,110 --> 00:13:21,540
-world it's more morbid
+world that's more morbid
 about livestock and pets.
 
 254
@@ -1246,13 +1246,13 @@ should have mentioned this
 
 263
 00:13:54,630 --> 00:13:58,170
-there's an rstud.io
-debugging short link.
+there's an rstud.io/debugging
+short link.
 
 264
 00:13:58,170 --> 00:14:00,960
 And that will take
-you to a read me
+you to a README
 
 265
 00:14:00,960 --> 00:14:04,740
@@ -1421,7 +1421,7 @@ is they have this habit
 
 300
 00:15:34,650 --> 00:15:37,360
-of working in an example.
+of working an example.
 
 301
 00:15:37,360 --> 00:15:42,030
@@ -1636,7 +1636,7 @@ exclamation and an adjective.
 345
 00:17:59,230 --> 00:18:02,050
 And then I call a
-function praise on it.
+function praise() on it.
 
 346
 00:18:02,050 --> 00:18:05,470
@@ -1646,7 +1646,7 @@ in base R. So the error
 347
 00:18:05,470 --> 00:18:08,470
 that we get is that it can't
-find the function praise.
+find the function praise().
 
 348
 00:18:08,470 --> 00:18:09,898
@@ -1694,12 +1694,12 @@ attach the praise package.
 357
 00:18:33,810 --> 00:18:36,280
 And then we call
-praise on template.
+praise() on template.
 
 358
 00:18:36,280 --> 00:18:39,590
 But template has not
-been divined here.
+been defined here.
 
 359
 00:18:39,590 --> 00:18:42,800
@@ -2201,7 +2201,7 @@ simplifying the data.
 462
 00:23:26,880 --> 00:23:31,990
 So if the data that created
-your problem is 500 rows,
+your problem has 500 rows,
 
 463
 00:23:31,990 --> 00:23:35,320
@@ -2248,7 +2248,7 @@ the repositories
 
 472
 00:23:59,440 --> 00:24:01,000
-for R packages on GitHub.
+for our packages on GitHub.
 
 473
 00:24:01,000 --> 00:24:03,700
@@ -2273,7 +2273,7 @@ he will do is he'll post--
 477
 00:24:14,160 --> 00:24:18,970
 and he always says it this way,
-slightly more minimal reprex.
+"slightly more minimal reprex".
 
 478
 00:24:18,970 --> 00:24:23,410
@@ -2297,7 +2297,7 @@ like the way that looks.
 482
 00:24:29,210 --> 00:24:32,660
 But this is actually based
-on data in a ggplot2 figure.
+on data and a ggplot2 figure.
 
 483
 00:24:32,660 --> 00:24:36,820
@@ -2486,7 +2486,7 @@ solved your own problem,
 
 522
 00:26:20,860 --> 00:26:23,900
-and no one steps forward
+and no one stepped forward
 to solve it for you?
 
 523
@@ -2582,7 +2582,7 @@ who can actually read it.
 542
 00:27:24,220 --> 00:27:28,900
 It's the classic can't
-install R Java error message.
+install rJava error message.
 
 543
 00:27:28,900 --> 00:27:34,210
@@ -2639,7 +2639,7 @@ of a function I've
 
 554
 00:28:06,070 --> 00:28:08,800
-written called fruit average.
+written called fruit_avg().
 
 555
 00:28:08,800 --> 00:28:10,750
@@ -2673,7 +2673,7 @@ on yumminess is 6.
 561
 00:28:27,160 --> 00:28:30,430
 And so when you pass that
-object to fruit average
+object to fruit_avg()
 
 562
 00:28:30,430 --> 00:28:35,220
@@ -2712,7 +2712,7 @@ You could argue that--
 570
 00:28:49,940 --> 00:28:53,017
 found zero fruits-- like,
-portalization is really hard.
+pluralization is really hard!
 
 571
 00:28:53,017 --> 00:28:54,850
@@ -2757,8 +2757,8 @@ And then I get an error.
 
 580
 00:29:16,410 --> 00:29:21,090
-And the error is about row
-means being applied to mini dat.
+And the error is about rowMeans()
+being applied to mini_dat.
 
 581
 00:29:21,090 --> 00:29:23,450
@@ -2767,11 +2767,11 @@ x must be an array.
 
 582
 00:29:23,450 --> 00:29:26,230
-So I didn't call a rowMeans.
+So I didn't call rowMeans().
 
 583
 00:29:26,230 --> 00:29:28,000
-I didn't make mini dat.
+I didn't make mini_dat.
 
 584
 00:29:28,000 --> 00:29:29,890
@@ -2794,7 +2794,7 @@ mean.
 588
 00:29:38,070 --> 00:29:40,640
 You're going to fiddle around
-in the bowels of fruit average
+in the bowels of fruit_avg()
 
 589
 00:29:40,640 --> 00:29:41,890
@@ -2802,8 +2802,8 @@ to figure out what's going on.
 
 590
 00:29:41,890 --> 00:29:44,710
-And does fruit
-average contain a bug?
+And does fruit_avg()
+contain a bug?
 
 591
 00:29:44,710 --> 00:29:48,910
@@ -2917,7 +2917,7 @@ through them in this order.
 
 614
 00:30:59,340 --> 00:31:04,110
-So trace back is your first
+So traceback() is your first
 line of defense, I guess,
 
 615
@@ -2971,7 +2971,7 @@ the past at this point.
 
 625
 00:31:37,620 --> 00:31:41,070
-Whereas if you use browser
+Whereas if you use browser()
 and related techniques,
 
 626
@@ -2995,7 +2995,7 @@ go through these.
 
 630
 00:31:51,100 --> 00:31:54,900
-So if I call fruit average
+So if I call fruit_avg()
 on our troublesome example,
 
 631
@@ -3005,7 +3005,7 @@ I get the error.
 632
 00:31:56,370 --> 00:31:59,370
 You immediately would
-call trace back here.
+call traceback() here.
 
 633
 00:31:59,370 --> 00:32:01,560
@@ -3019,21 +3019,21 @@ of calls that led to the error.
 
 635
 00:32:05,070 --> 00:32:07,680
-So you called fruit average.
+So you called fruit_avg().
 
 636
 00:32:07,680 --> 00:32:10,440
 Apparently somewhere inside
-fruit average, on line five,
+fruit_avg(), on line five,
 
 637
 00:32:10,440 --> 00:32:13,230
-in fact, rowMeans got called.
+in fact, rowMeans() got called.
 
 638
 00:32:13,230 --> 00:32:16,740
 And somewhere inside
-rowMeans there was a stop.
+rowMeans() there was a stop().
 
 639
 00:32:16,740 --> 00:32:19,360
@@ -3048,7 +3048,7 @@ across many, many languages.
 641
 00:32:23,130 --> 00:32:28,350
 In R, we summon it with
-the function trace back.
+the function traceback().
 
 642
 00:32:28,350 --> 00:32:30,415
@@ -3184,7 +3184,7 @@ method for how to handle errors.
 669
 00:33:55,260 --> 00:33:58,410
 And it will by default show
-you the base R trace back
+you the base R traceback()
 
 670
 00:33:58,410 --> 00:34:00,900
@@ -3198,7 +3198,7 @@ techniques that are coming next.
 
 672
 00:34:04,000 --> 00:34:06,420
-So that's trace back.
+So that's traceback().
 
 673
 00:34:06,420 --> 00:34:08,460
@@ -3291,7 +3291,7 @@ things at the time of an error,
 691
 00:35:00,870 --> 00:35:04,750
 you can set your error option
-to the recover function.
+to the recover() function.
 
 692
 00:35:04,750 --> 00:35:08,550
@@ -3314,11 +3314,11 @@ to the different function calls.
 
 696
 00:35:18,280 --> 00:35:20,230
-So I'm going to pick one here.
+So I'm going to pick 1 here.
 
 697
 00:35:20,230 --> 00:35:24,290
-I want to see what mini data is.
+I want to see what mini_dat is.
 
 698
 00:35:24,290 --> 00:35:30,540
@@ -3332,7 +3332,7 @@ because the prompt contains
 
 700
 00:35:33,420 --> 00:35:38,220
-the word "browse" and 1, which
+the word "Browse" and 1, which
 tells us which frame we're in.
 
 701
@@ -3342,7 +3342,7 @@ And you can print objects here.
 702
 00:35:40,530 --> 00:35:44,490
 But a lot of what people
-do here is they use ls
+do here is they use ls()
 
 703
 00:35:44,490 --> 00:35:47,310
@@ -3351,17 +3351,17 @@ to see which objects exist.
 704
 00:35:47,310 --> 00:35:49,300
 Or in this case,
-I'm using ls.stir
+I'm using ls.str()
 
 705
 00:35:49,300 --> 00:35:53,670
-stir to look at each
+to look at each
 object in the environment.
 
 706
 00:35:53,670 --> 00:35:56,850
 And I am particularly
-interested in mini dat
+interested in mini_dat
 
 707
 00:35:56,850 --> 00:35:58,620
@@ -3379,7 +3379,7 @@ the error that it's
 
 710
 00:36:02,950 --> 00:36:05,350
-being sent to rowMeans,
+being sent to rowMeans(),
 which I'm pretty sure needs
 
 711
@@ -3398,7 +3398,7 @@ the problem might be here.
 
 714
 00:36:12,700 --> 00:36:15,940
-If you do this recover
+If you do this recover()
 work inside RStudio,
 
 715
@@ -3441,12 +3441,12 @@ sort of test that.
 
 723
 00:36:40,340 --> 00:36:43,600
-So the final most interventional
+So the final, most interventional
 thing you can possibly do
 
 724
 00:36:43,600 --> 00:36:45,290
-is we're going to use browser.
+is we're going to use browser().
 
 725
 00:36:45,290 --> 00:36:48,640
@@ -3474,7 +3474,7 @@ because you'll have something
 
 730
 00:36:57,550 --> 00:37:00,100
-called source references.
+called "source references".
 
 731
 00:37:00,100 --> 00:37:02,410
@@ -3483,7 +3483,7 @@ you got at the actual source
 
 732
 00:37:02,410 --> 00:37:03,830
-of fruit average.
+of fruit_avg().
 
 733
 00:37:03,830 --> 00:37:07,480
@@ -3550,7 +3550,7 @@ the source open--
 746
 00:37:38,530 --> 00:37:41,880
 you can set what's called
-an IDE break point.
+an IDE breakpoint.
 
 747
 00:37:41,880 --> 00:37:43,840
@@ -3584,11 +3584,11 @@ bothered to download
 
 753
 00:37:56,560 --> 00:37:58,780
-the source, or its base R--
+the source, or it's base R--
 
 754
 00:37:58,780 --> 00:38:02,350
-you can use debug to get a
+you can use debug() to get a
 fairly similar experience.
 
 755
@@ -3604,17 +3604,17 @@ the actual source.
 757
 00:38:08,610 --> 00:38:14,870
 So this is a little video of me
-live browsering this problem.
+live browser()-ing this problem.
 
 758
 00:38:14,870 --> 00:38:19,420
 So first thing I do is I source
-a version of fruit average
+a version of fruit_avg()
 
 759
 00:38:19,420 --> 00:38:22,330
 that has that
-browser call in it.
+browser() call in it.
 
 760
 00:38:22,330 --> 00:38:24,120
@@ -3642,12 +3642,12 @@ interactive R console.
 
 765
 00:38:36,010 --> 00:38:38,990
-And the browse thing
+And the "Browse" thing
 will be in the prompt.
 
 766
 00:38:38,990 --> 00:38:42,790
-So I can use N now to
+So I can use 'n' now to
 go next line, next line.
 
 767
@@ -3662,12 +3662,12 @@ function line by line.
 
 769
 00:38:48,260 --> 00:38:50,790
-And finally we get to mini dat.
+And finally we get to mini_dat.
 
 770
 00:38:50,790 --> 00:38:54,280
 So I'm going to inspect
-mini dat very exhaustively
+mini_dat very exhaustively
 
 771
 00:38:54,280 --> 00:38:56,470
@@ -3676,7 +3676,7 @@ and see what it looks like.
 772
 00:38:56,470 --> 00:38:59,710
 I'm going to see what its
-dimensions, which are null,
+dimensions, which are NULL,
 
 773
 00:38:59,710 --> 00:39:02,560
@@ -3685,7 +3685,7 @@ how many columns this has,
 
 774
 00:39:02,560 --> 00:39:05,720
-which is also null,
+which is also NULL,
 because it's a vector.
 
 775
@@ -3705,7 +3705,7 @@ other debugging mode,
 
 778
 00:39:11,950 --> 00:39:15,340
-is I can redefine mini dat.
+is I can redefine mini_dat.
 
 779
 00:39:15,340 --> 00:39:18,460
@@ -3715,7 +3715,7 @@ the same sub-setting.
 780
 00:39:18,460 --> 00:39:21,190
 But I'm going to specify
-drop equals false so
+'drop = FALSE' so
 
 781
 00:39:21,190 --> 00:39:23,140
@@ -3762,7 +3762,7 @@ might be going wrong.
 
 790
 00:39:44,840 --> 00:39:46,120
-So that's what using browser--
+So that's what using browser()--
 
 791
 00:39:46,120 --> 00:39:48,640
@@ -3807,7 +3807,7 @@ myself--
 
 800
 00:40:04,720 --> 00:40:05,740
-to be in the browser.
+to be in the browser().
 
 801
 00:40:05,740 --> 00:40:07,320
@@ -3853,7 +3853,7 @@ more proactive to know about
 810
 00:40:28,890 --> 00:40:32,080
 is if you've used
-debug on a function,
+debug() on a function,
 
 811
 00:40:32,080 --> 00:40:34,720
@@ -3863,11 +3863,11 @@ you execute you're
 812
 00:40:34,720 --> 00:40:38,020
 going to get kicked
-back into the browser,
+back into the browser(),
 
 813
 00:40:38,020 --> 00:40:42,920
-un-debug on the same function
+undebug() on the same function
 as how you cancel this behavior.
 
 814
@@ -3882,7 +3882,7 @@ a policy of only using
 
 816
 00:40:48,010 --> 00:40:49,660
-debug once.
+debugonce().
 
 817
 00:40:49,660 --> 00:40:52,720
@@ -3975,13 +3975,13 @@ example we just worked,
 
 835
 00:41:41,130 --> 00:41:44,550
-like a fruit average was
+like if fruit_avg() was
 in a package I maintain.
 
 836
 00:41:44,550 --> 00:41:47,730
 Once I make that fix,
-drop equals false,
+'drop = FALSE',
 
 837
 00:41:47,730 --> 00:41:51,180
@@ -4091,7 +4091,7 @@ definitely about packages now--
 
 859
 00:42:54,840 --> 00:42:58,260
-is R command check
+is R CMD check
 itself will show you
 
 860
@@ -4163,7 +4163,7 @@ that those will run every time
 
 874
 00:43:33,000 --> 00:43:34,650
-R command check is done.
+R CMD check is done.
 
 875
 00:43:34,650 --> 00:43:38,100
@@ -4191,7 +4191,7 @@ in a smaller haystack.
 
 880
 00:43:50,220 --> 00:43:53,550
-If you only run R command
+If you only run R CMD
 check every 10 months,
 
 881
@@ -4246,8 +4246,8 @@ change, it will kick off,
 
 891
 00:44:28,560 --> 00:44:33,120
-running R command check, which
-includes your test, preferably
+running R CMD check, which
+includes your tests, preferably
 
 892
 00:44:33,120 --> 00:44:35,680
@@ -4405,7 +4405,7 @@ go wrong is that when the thing
 924
 00:46:23,370 --> 00:46:27,210
 that cannot possibly goes wrong,
-it's impossible to get out
+it's impossible to get at
 
 925
 00:46:27,210 --> 00:46:29,050
@@ -4463,7 +4463,7 @@ debug Excel import
 936
 00:46:58,800 --> 00:47:01,860
 or making HTTP calls
-or some sort of harry
+or some sort of hairy
 
 937
 00:47:01,860 --> 00:47:07,530
@@ -4540,7 +4540,7 @@ reason this sends people
 952
 00:47:50,790 --> 00:47:54,450
 for such a loop is
-the word closure
+the word 'closure'
 
 953
 00:47:54,450 --> 00:47:56,650
@@ -4550,7 +4550,7 @@ don't know what that means.
 954
 00:47:56,650 --> 00:48:02,130
 So we could also, in most cases,
-use the word function there.
+use the word 'function' there.
 
 955
 00:48:02,130 --> 00:48:03,900
@@ -4612,8 +4612,8 @@ controversial version
 
 967
 00:48:40,230 --> 00:48:43,320
-of object of closure
-is not subsettable,
+of 'object of closure
+is not subsettable',
 
 968
 00:48:43,320 --> 00:48:47,460
@@ -4675,7 +4675,7 @@ example is from dplyr.
 980
 00:49:15,960 --> 00:49:18,750
 So dplyr has a
-function called filter,
+function called filter(),
 
 981
 00:49:18,750 --> 00:49:22,080
@@ -4829,11 +4829,11 @@ weird situations,
 1012
 00:50:51,350 --> 00:50:55,630
 I'm going to fiddle around
-with these trace back, recover,
+with these traceback(), recover(),
 
 1013
 00:50:55,630 --> 00:50:58,520
-and browser for 10 minutes.
+and browser() for 10 minutes.
 
 1014
 00:50:58,520 --> 00:51:00,250
@@ -4910,7 +4910,7 @@ They're kind of large.
 1029
 00:51:39,470 --> 00:51:42,970
 So I would recommend that you
-look at them on Speaker Deck.
+look at them on SpeakerDeck.
 
 1030
 00:51:42,970 --> 00:51:46,330
