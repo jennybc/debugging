@@ -124,7 +124,7 @@ today it was actually
 
 27
 00:01:18,008 --> 00:01:19,830
-inspired by Kelly Baldwin.
+inspired by Kelly Bodwin.
 
 28
 00:01:19,830 --> 00:01:21,270
@@ -138,7 +138,7 @@ got the inspiration.
 30
 00:01:23,850 --> 00:01:26,820
 And that led me to spend
-one of my Saturday's
+one of my Saturdays
 
 31
 00:01:26,820 --> 00:01:29,670
@@ -241,8 +241,8 @@ about tools or about what
 
 52
 00:02:15,450 --> 00:02:18,360
-charts to use in terms of
-like data visualization.
+charts to use in terms of,
+like, data visualization.
 
 53
 00:02:18,360 --> 00:02:20,647
@@ -938,11 +938,11 @@ legend in the title.
 198
 00:07:58,100 --> 00:08:00,590
 And this will now be possible
-with the new grid text
+with the new gridtext
 
 199
 00:08:00,590 --> 00:08:05,450
-package, which I think Klaus is
+package, which I think Claus is
 talking about this afternoon.
 
 200
@@ -1219,7 +1219,7 @@ for data visualization.
 257
 00:10:24,690 --> 00:10:26,220
 I really like the
-source family it
+Source family it
 
 258
 00:10:26,220 --> 00:10:31,230
@@ -1399,11 +1399,11 @@ of tools out there.
 294
 00:12:04,470 --> 00:12:06,960
 I know people are probably
-familiar with things like color
+familiar with things like
 
 295
 00:12:06,960 --> 00:12:09,420
-brewer and there's other R
+colorbrewer and there's other R
 packages that will basically
 
 296
@@ -1987,7 +1987,7 @@ lines and symmetry,
 416
 00:16:51,370 --> 00:16:54,870
 reducing clutter, and
-increasing weight space.
+increasing white space.
 
 417
 00:16:54,870 --> 00:16:59,590
@@ -2063,7 +2063,7 @@ for aesthetics for maps?
 432
 00:17:40,515 --> 00:17:41,890
 WILL CHASE:
-Aesthetics from maps-
+Aesthetics for maps-
 
 433
 00:17:41,890 --> 00:17:45,700
@@ -2311,11 +2311,11 @@ for eight hours a day.
 483
 00:19:50,280 --> 00:19:52,760
 But it's months of like
-laying in bed at 4:00
+laying in bed at 4:00 AM
 
 484
 00:19:52,760 --> 00:19:56,085
-AM thinking about colors.
+thinking about colors.
 
 485
 00:19:56,085 --> 00:19:56,960
