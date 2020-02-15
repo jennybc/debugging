@@ -22,12 +22,9 @@ Slides [as PDF file](debugging-jenny-bryan.pdf) here in this repo
 
 ## Video
 
-The talk will be live-streamed.
+The original rstudio::conf talk was live-streamed and recorded. Video is available here:
 
-  * 9:00 AM - 10:00 AM, January 30, 2020 (Thursday, day 2 of conf)
-  * At that time, visit <https://rstudio.com/conference/> and it should be obvious how to access the stream.
-
-Video is available here: *link to come, eventually, after the conference*
+<https://resources.rstudio.com/rstudio-conf-2020/object-of-type-closure-is-not-subsettable-jenny-bryan>
 
 ## Credits and resources
 
