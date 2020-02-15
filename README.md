@@ -14,7 +14,7 @@ GitHub: [@jennybc](https://github.com/jennybc)
 
 ## Slides
 
-<a href="https://speakerdeck.com/jennybc/object-of-type-closure-is-not-subsettable"><img src="debugging-title-400.jpg"></a>
+<a href="https://speakerdeck.com/jennybc/object-of-type-closure-is-not-subsettable"><img src="debugging-title-600.jpg"></a>
 
 Slides [on SpeakerDeck](https://speakerdeck.com/jennybc/object-of-type-closure-is-not-subsettable)
 
