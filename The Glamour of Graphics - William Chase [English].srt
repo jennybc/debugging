@@ -1,0 +1,2487 @@
+1
+00:00:01,936 --> 00:00:03,388
+[R STUDIO SOUND BITE]
+
+2
+00:00:05,330 --> 00:00:07,023
+ANNOUNCER: So
+without further ado,
+
+3
+00:00:07,023 --> 00:00:08,690
+I'd like to introduce
+our first speaker,
+
+4
+00:00:08,690 --> 00:00:12,998
+Will Chase, speaking on
+the glamour of graphics.
+
+5
+00:00:12,998 --> 00:00:14,990
+[APPLAUSE]
+
+6
+00:00:23,277 --> 00:00:25,860
+WILL CHASE: All right, so thank
+you for coming today everyone.
+
+7
+00:00:25,860 --> 00:00:27,660
+And welcome to my
+talk on the glamour
+
+8
+00:00:27,660 --> 00:00:32,439
+of graphics, which is a talk
+on the design of charts.
+
+9
+00:00:32,439 --> 00:00:35,190
+So if you recognize me,
+it's probably from Twitter.
+
+10
+00:00:35,190 --> 00:00:37,350
+I tweet excessively.
+
+11
+00:00:37,350 --> 00:00:40,200
+And you may also
+recognize my website,
+
+12
+00:00:40,200 --> 00:00:43,050
+williamrchase.com,
+where I post lots
+
+13
+00:00:43,050 --> 00:00:46,830
+of blogs about art
+and generative art--
+
+14
+00:00:46,830 --> 00:00:49,230
+how to make it in
+R, R tutorials,
+
+15
+00:00:49,230 --> 00:00:51,750
+all sorts of stuff like that.
+
+16
+00:00:51,750 --> 00:00:54,750
+So professionally, I
+come from academia.
+
+17
+00:00:54,750 --> 00:00:57,600
+I worked at Penn State and
+then U Penn for many years.
+
+18
+00:00:57,600 --> 00:01:00,300
+And now, recently, I've
+joined Fidelity Investments
+
+19
+00:01:00,300 --> 00:01:03,990
+as a Senior
+Visualization Analyst
+
+20
+00:01:03,990 --> 00:01:06,450
+where I'm focusing on visual
+design and storytelling
+
+21
+00:01:06,450 --> 00:01:08,320
+within our organization.
+
+22
+00:01:08,320 --> 00:01:10,143
+I also do freelance
+data visualization.
+
+23
+00:01:10,143 --> 00:01:12,060
+So if you're interested
+in talking about that,
+
+24
+00:01:12,060 --> 00:01:14,260
+please get in touch.
+
+25
+00:01:14,260 --> 00:01:16,050
+Now the glamour of
+graphics that I'm
+
+26
+00:01:16,050 --> 00:01:18,008
+going to be talking about
+today it was actually
+
+27
+00:01:18,008 --> 00:01:19,830
+inspired by Kelly Bodwin.
+
+28
+00:01:19,830 --> 00:01:21,270
+As I say, I tweet excessively.
+
+29
+00:01:21,270 --> 00:01:23,850
+So this is where I
+got the inspiration.
+
+30
+00:01:23,850 --> 00:01:26,820
+And that led me to spend
+one of my Saturdays
+
+31
+00:01:26,820 --> 00:01:29,670
+making this Glamour
+Magazine spoof
+
+32
+00:01:29,670 --> 00:01:33,120
+which I think was probably
+my most viral tweet ever.
+
+33
+00:01:33,120 --> 00:01:35,580
+And I may be the
+first person to get
+
+34
+00:01:35,580 --> 00:01:38,670
+invited to talk at RStudio
+conf based on a Twitter meme
+
+35
+00:01:38,670 --> 00:01:39,810
+that I made.
+
+36
+00:01:39,810 --> 00:01:41,100
+So I'm pretty proud of that.
+
+37
+00:01:41,100 --> 00:01:43,350
+But I think that there's
+actually some substance here.
+
+38
+00:01:43,350 --> 00:01:45,810
+So this said "Take your
+charts from drab to fab".
+
+39
+00:01:45,810 --> 00:01:48,400
+And that's sort of what we're
+going to try to do today.
+
+40
+00:01:48,400 --> 00:01:49,513
+So this is the drab.
+
+41
+00:01:49,513 --> 00:01:50,930
+This is the starting
+point, right?
+
+42
+00:01:50,930 --> 00:01:54,390
+Sorry, Hadley, but it's true.
+
+43
+00:01:54,390 --> 00:01:57,900
+What we're going to try to do
+is get something more like this.
+
+44
+00:01:57,900 --> 00:02:00,060
+So a little bit about
+what this talk is not it's
+
+45
+00:02:00,060 --> 00:02:02,860
+not a talk about chart shaming.
+
+46
+00:02:02,860 --> 00:02:05,192
+So you'll see a lot
+of design mistakes
+
+47
+00:02:05,192 --> 00:02:06,650
+that I'm going to
+talk about today.
+
+48
+00:02:06,650 --> 00:02:08,830
+But if you go to my blog
+and look at my portfolio,
+
+49
+00:02:08,830 --> 00:02:10,860
+you will see all of
+those mistakes featured
+
+50
+00:02:10,860 --> 00:02:12,750
+heavily there.
+
+51
+00:02:12,750 --> 00:02:15,450
+It's also not a talk
+about tools or about what
+
+52
+00:02:15,450 --> 00:02:18,360
+charts to use in terms of,
+like, data visualization.
+
+53
+00:02:18,360 --> 00:02:20,647
+It's really focused
+on the aesthetics.
+
+54
+00:02:20,647 --> 00:02:22,980
+So the reason you should care
+about aesthetics in charts
+
+55
+00:02:22,980 --> 00:02:24,330
+is pretty obvious to me.
+
+56
+00:02:24,330 --> 00:02:26,910
+But it will help you engage
+a much wider audience
+
+57
+00:02:26,910 --> 00:02:28,260
+with your work.
+
+58
+00:02:28,260 --> 00:02:30,660
+It'll actually help your
+work to be perceived as more
+
+59
+00:02:30,660 --> 00:02:31,842
+usable and more intuitive.
+
+60
+00:02:31,842 --> 00:02:34,050
+So it's actually been shown
+that charts that are more
+
+61
+00:02:34,050 --> 00:02:36,120
+aesthetically
+pleasing are perceived
+
+62
+00:02:36,120 --> 00:02:38,193
+by users to be more intuitive.
+
+63
+00:02:38,193 --> 00:02:40,110
+And finally, they'll
+just let you show respect
+
+64
+00:02:40,110 --> 00:02:40,860
+for your audience.
+
+65
+00:02:40,860 --> 00:02:43,300
+You know, people spend their
+time looking at your charts.
+
+66
+00:02:43,300 --> 00:02:46,350
+You should spend time
+making them look nice.
+
+67
+00:02:46,350 --> 00:02:48,067
+So when I started
+researching this,
+
+68
+00:02:48,067 --> 00:02:50,400
+I thought it was sort of just
+a coincidence-- of grammar
+
+69
+00:02:50,400 --> 00:02:52,830
+of graphics, glamour
+of graphics, haha.
+
+70
+00:02:52,830 --> 00:02:55,590
+But it turns out that the
+word glamour is actually
+
+71
+00:02:55,590 --> 00:02:57,540
+derived from the word grammar.
+
+72
+00:02:57,540 --> 00:02:59,880
+So back in the Middle
+Ages, the word grammar
+
+73
+00:02:59,880 --> 00:03:01,410
+meant all learning.
+
+74
+00:03:01,410 --> 00:03:05,340
+And that included things
+like magic and occult.
+
+75
+00:03:05,340 --> 00:03:08,940
+And through the ages, that word
+sort of morphed into glamour.
+
+76
+00:03:08,940 --> 00:03:11,460
+And as it did it lost the
+association with knowledge
+
+77
+00:03:11,460 --> 00:03:15,900
+and it became to mean just
+a magical spell actually.
+
+78
+00:03:15,900 --> 00:03:18,040
+And then eventually,
+in the 18th century,
+
+79
+00:03:18,040 --> 00:03:20,202
+the idea of magic sort of
+washed away a little bit.
+
+80
+00:03:20,202 --> 00:03:21,660
+And we got the
+meaning that we know
+
+81
+00:03:21,660 --> 00:03:25,260
+today which is the sort of
+exciting, illusory, romantic
+
+82
+00:03:25,260 --> 00:03:27,740
+attractiveness.
+
+83
+00:03:27,740 --> 00:03:29,570
+So the grammar of
+graphics is a tool
+
+84
+00:03:29,570 --> 00:03:31,370
+that enables us to
+concisely describe
+
+85
+00:03:31,370 --> 00:03:33,295
+the components of a graphic.
+
+86
+00:03:33,295 --> 00:03:34,670
+And what I'm going
+to do today is
+
+87
+00:03:34,670 --> 00:03:37,730
+try to bring this sort of
+illusory, romantic quality
+
+88
+00:03:37,730 --> 00:03:40,550
+of glamour a little bit
+closer to a grammar.
+
+89
+00:03:40,550 --> 00:03:42,050
+So I'm going to
+describe a tool that
+
+90
+00:03:42,050 --> 00:03:45,865
+enables us to concisely describe
+the design of a graphic.
+
+91
+00:03:45,865 --> 00:03:47,240
+So in the grammar
+of graphics, we
+
+92
+00:03:47,240 --> 00:03:51,800
+have these three components of
+data aesthetics and geometries
+
+93
+00:03:51,800 --> 00:03:53,548
+that are really the
+core of any chart.
+
+94
+00:03:53,548 --> 00:03:54,840
+And I know there's more layers.
+
+95
+00:03:54,840 --> 00:03:58,202
+But this is really the core
+of how to describe a chart.
+
+96
+00:03:58,202 --> 00:04:00,410
+What I'm going to describe
+in the glamour of graphics
+
+97
+00:04:00,410 --> 00:04:00,950
+is similar.
+
+98
+00:04:00,950 --> 00:04:03,230
+But I'm going to
+describe three layers
+
+99
+00:04:03,230 --> 00:04:05,820
+that you need to describe
+the design of a graphic.
+
+100
+00:04:05,820 --> 00:04:09,500
+And that's the layout, the
+typography, and the color.
+
+101
+00:04:09,500 --> 00:04:12,390
+So beginning with
+layout, I'm going
+
+102
+00:04:12,390 --> 00:04:14,910
+to talk about three
+main concepts today.
+
+103
+00:04:14,910 --> 00:04:18,570
+And that is alignment,
+whitespace, and grids, lines,
+
+104
+00:04:18,570 --> 00:04:20,430
+and borders.
+
+105
+00:04:20,430 --> 00:04:22,350
+So beginning with
+alignment, I want
+
+106
+00:04:22,350 --> 00:04:24,540
+to talk about titles first.
+
+107
+00:04:24,540 --> 00:04:29,430
+Titles should be
+top-left aligned usually.
+
+108
+00:04:29,430 --> 00:04:31,110
+And when I say
+top-left aligned, I
+
+109
+00:04:31,110 --> 00:04:33,908
+don't mean the case
+that you see on the left
+
+110
+00:04:33,908 --> 00:04:35,700
+where you have left
+aligned with your data.
+
+111
+00:04:35,700 --> 00:04:38,850
+I mean left aligned all the
+way to the edge of your chart
+
+112
+00:04:38,850 --> 00:04:41,555
+to create a nice clean line
+with the edge of your chart.
+
+113
+00:04:41,555 --> 00:04:42,930
+Now previously,
+this was actually
+
+114
+00:04:42,930 --> 00:04:44,893
+kind of tricky to do
+with ggplot but luckily
+
+115
+00:04:44,893 --> 00:04:46,310
+in the development
+version we have
+
+116
+00:04:46,310 --> 00:04:50,870
+a new argument that makes
+this very, very simple to do.
+
+117
+00:04:50,870 --> 00:04:54,150
+Next I want you
+to please not make
+
+118
+00:04:54,150 --> 00:04:57,390
+me do like this when
+I read your chart.
+
+119
+00:04:57,390 --> 00:04:59,550
+So I see this a lot
+of times, especially
+
+120
+00:04:59,550 --> 00:05:02,910
+in academic graphics where you
+have these really long x-axis
+
+121
+00:05:02,910 --> 00:05:04,290
+labels.
+
+122
+00:05:04,290 --> 00:05:05,525
+Nobody wants to do that.
+
+123
+00:05:05,525 --> 00:05:06,900
+So, of course,
+it's always better
+
+124
+00:05:06,900 --> 00:05:10,193
+if you can to flip our
+coordinates horizontally.
+
+125
+00:05:10,193 --> 00:05:11,610
+Or if you can't
+manage to flip it,
+
+126
+00:05:11,610 --> 00:05:14,160
+you can just try to make the
+text horizontal by increasing
+
+127
+00:05:14,160 --> 00:05:16,118
+your spacing and such.
+
+128
+00:05:16,118 --> 00:05:17,910
+This is a little more
+controversial, maybe,
+
+129
+00:05:17,910 --> 00:05:19,980
+but I also think it's
+actually best practice
+
+130
+00:05:19,980 --> 00:05:23,220
+not to use vertical
+axis labels because you
+
+131
+00:05:23,220 --> 00:05:24,292
+have the same problem.
+
+132
+00:05:24,292 --> 00:05:25,500
+So you can do the same thing.
+
+133
+00:05:25,500 --> 00:05:27,900
+You can try to make the
+text just horizontal.
+
+134
+00:05:27,900 --> 00:05:31,500
+Or a lot of times you can get
+rid of axis labels entirely.
+
+135
+00:05:31,500 --> 00:05:34,050
+A lot of axis labels are
+completely unnecessary-- things
+
+136
+00:05:34,050 --> 00:05:35,010
+like dates.
+
+137
+00:05:35,010 --> 00:05:36,960
+In this case, SUV, minivan--
+
+138
+00:05:36,960 --> 00:05:39,500
+it's obvious these
+are types of cars.
+
+139
+00:05:39,500 --> 00:05:41,730
+And usually by just
+including a good title,
+
+140
+00:05:41,730 --> 00:05:43,575
+you can do away
+with axis labels.
+
+141
+00:05:45,543 --> 00:05:47,210
+So when you're thinking
+about alignment,
+
+142
+00:05:47,210 --> 00:05:51,260
+you should always try to create
+clean lines and symmetry.
+
+143
+00:05:51,260 --> 00:05:53,390
+And what I want to go
+over is a little bit--
+
+144
+00:05:53,390 --> 00:05:55,460
+this graphic from 538
+that I think really
+
+145
+00:05:55,460 --> 00:05:57,660
+illustrates some
+of these points.
+
+146
+00:05:57,660 --> 00:05:59,400
+So this doesn't have
+big blocks of text.
+
+147
+00:05:59,400 --> 00:06:01,850
+But just to mention, if you
+do have big blocks of text
+
+148
+00:06:01,850 --> 00:06:03,680
+like an infographic
+or something,
+
+149
+00:06:03,680 --> 00:06:05,990
+you want to left align
+those most likely.
+
+150
+00:06:05,990 --> 00:06:09,410
+Left alignment should
+sort of be your default.
+
+151
+00:06:09,410 --> 00:06:12,590
+Right alignment can be used
+for labels a lot of times,
+
+152
+00:06:12,590 --> 00:06:14,720
+so especially like
+horizontal bar labels where
+
+153
+00:06:14,720 --> 00:06:16,280
+the goal is to
+create a clean line
+
+154
+00:06:16,280 --> 00:06:19,040
+with the edge of your data.
+
+155
+00:06:19,040 --> 00:06:21,320
+And sometimes
+subtitles or labels
+
+156
+00:06:21,320 --> 00:06:23,810
+can be center aligned if
+it helps to create symmetry
+
+157
+00:06:23,810 --> 00:06:25,657
+within the graphic.
+
+158
+00:06:25,657 --> 00:06:27,740
+So in this case, you can
+see actually the designer
+
+159
+00:06:27,740 --> 00:06:29,753
+made a mistake on the 2014 one.
+
+160
+00:06:29,753 --> 00:06:30,920
+It should be center aligned.
+
+161
+00:06:30,920 --> 00:06:32,858
+But it's slightly off center.
+
+162
+00:06:32,858 --> 00:06:34,650
+But if you look at the
+rest of the graphic,
+
+163
+00:06:34,650 --> 00:06:37,323
+you can see how this left
+alignment, right alignment,
+
+164
+00:06:37,323 --> 00:06:39,740
+and center alignment sort of
+creates this perfect symmetry
+
+165
+00:06:39,740 --> 00:06:40,532
+within the graphic.
+
+166
+00:06:42,860 --> 00:06:46,100
+So charts often come with
+these extraneous elements.
+
+167
+00:06:46,100 --> 00:06:47,360
+They're not data.
+
+168
+00:06:47,360 --> 00:06:50,310
+And a lot of times, they
+can distract from the chart.
+
+169
+00:06:50,310 --> 00:06:53,750
+So I want to talk a little
+bit about how to reduce those.
+
+170
+00:06:53,750 --> 00:06:55,790
+A good example of
+this is borders.
+
+171
+00:06:55,790 --> 00:06:58,397
+You almost never need
+a border in a chart.
+
+172
+00:06:58,397 --> 00:07:00,230
+Oftentimes, they just
+don't serve a purpose.
+
+173
+00:07:00,230 --> 00:07:02,300
+And all they do is
+distract from your data--
+
+174
+00:07:02,300 --> 00:07:05,220
+add ink to the page.
+
+175
+00:07:05,220 --> 00:07:07,580
+Another thing is grid lines.
+
+176
+00:07:07,580 --> 00:07:08,960
+I understand that
+there's reasons
+
+177
+00:07:08,960 --> 00:07:10,820
+to have grid lines sometimes.
+
+178
+00:07:10,820 --> 00:07:12,600
+But I encourage you
+to always question
+
+179
+00:07:12,600 --> 00:07:13,910
+the purpose of every grid line.
+
+180
+00:07:13,910 --> 00:07:16,370
+Do you need horizontal
+grid lines in every case?
+
+181
+00:07:16,370 --> 00:07:18,750
+Do you need minor grid lines?
+
+182
+00:07:18,750 --> 00:07:21,080
+If not, please remove them.
+
+183
+00:07:21,080 --> 00:07:22,970
+If you do need them,
+I encourage you
+
+184
+00:07:22,970 --> 00:07:25,897
+to make them as light
+and as small as possible
+
+185
+00:07:25,897 --> 00:07:27,980
+so that they sort of
+disappear into the background
+
+186
+00:07:27,980 --> 00:07:31,278
+rather than distracting
+from your data.
+
+187
+00:07:31,278 --> 00:07:33,320
+Another thing that distracts
+from your data a lot
+
+188
+00:07:33,320 --> 00:07:35,210
+is legends,
+particularly when you
+
+189
+00:07:35,210 --> 00:07:38,300
+have like a big blob of a legend
+off to the right-hand side
+
+190
+00:07:38,300 --> 00:07:39,527
+of your chart.
+
+191
+00:07:39,527 --> 00:07:41,360
+It's not a very good
+flow within your chart.
+
+192
+00:07:41,360 --> 00:07:42,872
+So I recommend, if
+you have legends,
+
+193
+00:07:42,872 --> 00:07:44,330
+you put them right
+below the titles
+
+194
+00:07:44,330 --> 00:07:47,240
+where it creates a nice
+flow with your chart.
+
+195
+00:07:47,240 --> 00:07:50,960
+A better solution even is
+to directly label your data.
+
+196
+00:07:50,960 --> 00:07:54,410
+Or my favorite solution
+is to use colored text
+
+197
+00:07:54,410 --> 00:07:58,100
+to indicate your
+legend in the title.
+
+198
+00:07:58,100 --> 00:08:00,590
+And this will now be possible
+with the new gridtext
+
+199
+00:08:00,590 --> 00:08:05,450
+package, which I think Claus is
+talking about this afternoon.
+
+200
+00:08:05,450 --> 00:08:09,013
+So a few words about whitespace.
+
+201
+00:08:09,013 --> 00:08:10,430
+This is particularly
+relevant when
+
+202
+00:08:10,430 --> 00:08:13,010
+you're looking at things like
+dashboards and infographics
+
+203
+00:08:13,010 --> 00:08:15,510
+where you're laying out
+a lot of charts together.
+
+204
+00:08:15,510 --> 00:08:16,970
+And what I often
+see is people want
+
+205
+00:08:16,970 --> 00:08:19,310
+to cram as much information
+as they can possibly
+
+206
+00:08:19,310 --> 00:08:21,300
+get onto the page.
+
+207
+00:08:21,300 --> 00:08:23,630
+But what that ends
+up resulting in
+
+208
+00:08:23,630 --> 00:08:26,730
+is that you can't even
+understand any of it.
+
+209
+00:08:26,730 --> 00:08:29,070
+Your eye has no idea
+where to go on the page.
+
+210
+00:08:29,070 --> 00:08:32,130
+And so your charts really
+need room to breathe.
+
+211
+00:08:32,130 --> 00:08:34,070
+So I always recommend
+it's like garlic--
+
+212
+00:08:34,070 --> 00:08:36,440
+you take as much white
+space as you think you need,
+
+213
+00:08:36,440 --> 00:08:37,340
+and then triple it.
+
+214
+00:08:39,950 --> 00:08:41,900
+So that's sort of the
+foundation of building
+
+215
+00:08:41,900 --> 00:08:43,880
+a nice chart is the layout.
+
+216
+00:08:43,880 --> 00:08:47,620
+And next up, I'm going
+to talk about typography.
+
+217
+00:08:47,620 --> 00:08:51,140
+So typography is a very
+sort of vast subject.
+
+218
+00:08:51,140 --> 00:08:52,670
+It has a lot of details in it.
+
+219
+00:08:52,670 --> 00:08:54,080
+And I can't cover
+them all today.
+
+220
+00:08:54,080 --> 00:08:55,790
+But what I highly,
+highly recommend
+
+221
+00:08:55,790 --> 00:08:59,060
+you do is go to
+practicaltypography.com.
+
+222
+00:08:59,060 --> 00:09:02,223
+This is a completely free,
+open-source online book
+
+223
+00:09:02,223 --> 00:09:03,890
+that will basically
+teach you everything
+
+224
+00:09:03,890 --> 00:09:06,260
+you could need to
+know about typography
+
+225
+00:09:06,260 --> 00:09:07,520
+in a very concise way.
+
+226
+00:09:07,520 --> 00:09:09,920
+It'll take about three hours
+to read cover to cover.
+
+227
+00:09:09,920 --> 00:09:12,590
+And it will vastly improve
+the design of everything
+
+228
+00:09:12,590 --> 00:09:14,840
+that you write.
+
+229
+00:09:14,840 --> 00:09:17,840
+But I do want to touch a
+little bit on fonts, hierarchy,
+
+230
+00:09:17,840 --> 00:09:21,380
+and a couple of dataviz
+specific concerns.
+
+231
+00:09:21,380 --> 00:09:24,560
+So the font that you choose
+really matters in a chart.
+
+232
+00:09:24,560 --> 00:09:27,958
+It especially affects the
+tone of your graphic, right?
+
+233
+00:09:27,958 --> 00:09:29,750
+You can send a completely
+different message
+
+234
+00:09:29,750 --> 00:09:32,150
+based on the font you choose.
+
+235
+00:09:32,150 --> 00:09:34,850
+And it can also really affect
+the legibility of your graphic,
+
+236
+00:09:34,850 --> 00:09:35,990
+right?
+
+237
+00:09:35,990 --> 00:09:38,502
+It's pretty easy to
+have misunderstandings
+
+238
+00:09:38,502 --> 00:09:39,710
+if you choose the wrong font.
+
+239
+00:09:42,850 --> 00:09:43,620
+This is important.
+
+240
+00:09:46,140 --> 00:09:48,720
+And the unfortunate thing is
+that most people will just
+
+241
+00:09:48,720 --> 00:09:51,790
+go for the system
+font-- the default font.
+
+242
+00:09:51,790 --> 00:09:54,630
+And that's sad because
+most system fonts
+
+243
+00:09:54,630 --> 00:09:55,490
+are pretty terrible.
+
+244
+00:09:55,490 --> 00:09:56,790
+I'm sorry to tell you.
+
+245
+00:09:56,790 --> 00:09:58,980
+Most of them were
+designed for the screens
+
+246
+00:09:58,980 --> 00:10:00,990
+that we had in the
+1990s, which were
+
+247
+00:10:00,990 --> 00:10:02,430
+all pixilated and terrible.
+
+248
+00:10:02,430 --> 00:10:05,312
+And on modern screens,
+they look pretty ugly.
+
+249
+00:10:05,312 --> 00:10:07,020
+So if you're a
+professional organization,
+
+250
+00:10:07,020 --> 00:10:08,515
+you might buy a
+professional font.
+
+251
+00:10:08,515 --> 00:10:10,140
+But for most of you
+in the room, you'll
+
+252
+00:10:10,140 --> 00:10:12,450
+probably be looking
+at free fonts.
+
+253
+00:10:12,450 --> 00:10:14,730
+And the good news
+is that, in 2020, we
+
+254
+00:10:14,730 --> 00:10:17,280
+have a wealth of wonderfully
+designed, beautiful, free
+
+255
+00:10:17,280 --> 00:10:21,660
+fonts available easily
+at fonts.google.com.
+
+256
+00:10:21,660 --> 00:10:24,690
+These are some of my favorites
+for data visualization.
+
+257
+00:10:24,690 --> 00:10:26,220
+I really like the
+Source family it
+
+258
+00:10:26,220 --> 00:10:31,230
+has a sans serif variety, serif
+variety, mono spaced variety.
+
+259
+00:10:31,230 --> 00:10:35,520
+And they're all available and
+lots of weights and sizes.
+
+260
+00:10:35,520 --> 00:10:37,770
+So next, I want to touch a
+little bit upon hierarchy--
+
+261
+00:10:37,770 --> 00:10:40,450
+a typographic hierarchy.
+
+262
+00:10:40,450 --> 00:10:42,330
+So a typographic
+hierarchy is just
+
+263
+00:10:42,330 --> 00:10:45,420
+a way of encoding an
+order of importance
+
+264
+00:10:45,420 --> 00:10:47,310
+in your type that
+helps to navigate
+
+265
+00:10:47,310 --> 00:10:51,385
+your readers through your
+chart or through your document.
+
+266
+00:10:51,385 --> 00:10:53,260
+And there's several ways
+to create hierarchy.
+
+267
+00:10:53,260 --> 00:10:55,410
+So this is a case
+where we have none.
+
+268
+00:10:55,410 --> 00:10:58,530
+The easiest way to create
+hierarchy is with size.
+
+269
+00:10:58,530 --> 00:11:00,780
+But you can also do
+it with font weight,
+
+270
+00:11:00,780 --> 00:11:04,080
+with color, with spacing.
+
+271
+00:11:04,080 --> 00:11:07,320
+You can do it with a
+contrasting typeface,
+
+272
+00:11:07,320 --> 00:11:10,500
+or, ideally, a combination
+of all of these things.
+
+273
+00:11:10,500 --> 00:11:12,810
+And learning the rules of
+how to create a hierarchy,
+
+274
+00:11:12,810 --> 00:11:15,030
+you know, what should
+you make your title
+
+275
+00:11:15,030 --> 00:11:17,130
+versus your subtitle
+versus your body text
+
+276
+00:11:17,130 --> 00:11:19,830
+is just a skill that takes
+a little bit of practice.
+
+277
+00:11:19,830 --> 00:11:21,450
+But there are some
+more specific tips
+
+278
+00:11:21,450 --> 00:11:25,348
+in the practical typography
+book that I mentioned earlier.
+
+279
+00:11:25,348 --> 00:11:27,640
+And finally, I want to talk
+about numbers a little bit.
+
+280
+00:11:27,640 --> 00:11:31,810
+So we use numbers all the
+time in data visualization.
+
+281
+00:11:31,810 --> 00:11:34,090
+Some fonts have what's
+called old style numbers.
+
+282
+00:11:34,090 --> 00:11:36,400
+I recommend do not use these.
+
+283
+00:11:36,400 --> 00:11:38,980
+Most of those fonts will also
+have lining numbers, which
+
+284
+00:11:38,980 --> 00:11:41,620
+have all the same x height.
+
+285
+00:11:41,620 --> 00:11:43,120
+And in a similar
+vein, you also want
+
+286
+00:11:43,120 --> 00:11:45,640
+to choose a font that
+has tabular numbers.
+
+287
+00:11:45,640 --> 00:11:48,130
+Tabular numbers all
+have the same width
+
+288
+00:11:48,130 --> 00:11:49,990
+so that when you make
+a table or something,
+
+289
+00:11:49,990 --> 00:11:52,110
+everything will line up
+in a nice perfect column.
+
+290
+00:11:54,860 --> 00:11:58,530
+So having covered the layout
+and the typography of a chart,
+
+291
+00:11:58,530 --> 00:12:00,840
+I want to talk a little
+bit about the color--
+
+292
+00:12:00,840 --> 00:12:02,970
+everyone's favorite topic.
+
+293
+00:12:02,970 --> 00:12:04,470
+So there's a lot
+of tools out there.
+
+294
+00:12:04,470 --> 00:12:06,960
+I know people are probably
+familiar with things like
+
+295
+00:12:06,960 --> 00:12:09,420
+colorbrewer and there's other R
+packages that will basically
+
+296
+00:12:09,420 --> 00:12:13,230
+just choose a color for you--
+choose a color palette for you.
+
+297
+00:12:13,230 --> 00:12:15,232
+What I want to do today
+is try to give you
+
+298
+00:12:15,232 --> 00:12:17,190
+a little bit of information
+that will hopefully
+
+299
+00:12:17,190 --> 00:12:21,130
+help you to choose your
+own color palettes.
+
+300
+00:12:21,130 --> 00:12:23,130
+The truth is, though,
+that color is really hard.
+
+301
+00:12:23,130 --> 00:12:24,880
+So I don't want to lie
+to you and tell you
+
+302
+00:12:24,880 --> 00:12:25,800
+it's going to be easy.
+
+303
+00:12:25,800 --> 00:12:27,460
+It's something I
+still struggle with.
+
+304
+00:12:27,460 --> 00:12:29,400
+And it's just such
+a complex subject
+
+305
+00:12:29,400 --> 00:12:31,420
+that it takes a lot of practice.
+
+306
+00:12:31,420 --> 00:12:34,110
+But, I think there are a few
+things that I can tell you
+
+307
+00:12:34,110 --> 00:12:35,670
+today about color
+theory and then
+
+308
+00:12:35,670 --> 00:12:37,980
+a few sort of
+practical tips to help
+
+309
+00:12:37,980 --> 00:12:40,638
+improve your usage of color.
+
+310
+00:12:40,638 --> 00:12:43,180
+So one of the chief complaints
+I get from people is they say,
+
+311
+00:12:43,180 --> 00:12:45,222
+I just don't know what
+colors look good together.
+
+312
+00:12:45,222 --> 00:12:47,255
+How do I know what
+looks good together?
+
+313
+00:12:47,255 --> 00:12:49,630
+This is a case where the color
+wheel can really help you.
+
+314
+00:12:49,630 --> 00:12:53,910
+So the color wheel like we
+all know from grade school--
+
+315
+00:12:53,910 --> 00:12:55,500
+it looks like this.
+
+316
+00:12:55,500 --> 00:12:57,703
+And there's several
+types of palettes
+
+317
+00:12:57,703 --> 00:13:00,120
+you can choose from the color
+wheel that will usually have
+
+318
+00:13:00,120 --> 00:13:02,680
+colors that go well together.
+
+319
+00:13:02,680 --> 00:13:04,752
+So if you want to choose
+a high contrast palette,
+
+320
+00:13:04,752 --> 00:13:06,210
+you can choose a
+complementary one.
+
+321
+00:13:06,210 --> 00:13:09,207
+That means opposite
+sides of the color wheel.
+
+322
+00:13:09,207 --> 00:13:11,040
+You can also choose
+analogous color palettes
+
+323
+00:13:11,040 --> 00:13:13,743
+which all come from the same
+side of the color wheel.
+
+324
+00:13:13,743 --> 00:13:15,660
+And there's triadic which
+are sort of laid out
+
+325
+00:13:15,660 --> 00:13:17,370
+in a triangle like this.
+
+326
+00:13:17,370 --> 00:13:21,540
+And there's several other
+color palettes as well.
+
+327
+00:13:21,540 --> 00:13:25,070
+There's split complementary,
+quadratic, and lots of others.
+
+328
+00:13:25,070 --> 00:13:27,570
+And you can read a little bit
+more about sort of the feeling
+
+329
+00:13:27,570 --> 00:13:29,010
+that all these color
+palettes give you.
+
+330
+00:13:29,010 --> 00:13:31,302
+But this is a nice way to
+sort of get started if you're
+
+331
+00:13:31,302 --> 00:13:34,152
+looking to choose some hues.
+
+332
+00:13:34,152 --> 00:13:35,610
+So once you choose
+those, you might
+
+333
+00:13:35,610 --> 00:13:37,277
+want to adjust your
+colors a little bit.
+
+334
+00:13:37,277 --> 00:13:39,400
+And I want to highlight
+the HSL color space.
+
+335
+00:13:39,400 --> 00:13:42,390
+So this is a way of
+describing color in contrast
+
+336
+00:13:42,390 --> 00:13:44,030
+to something like RGB.
+
+337
+00:13:44,030 --> 00:13:46,800
+HSL stands for the hue,
+saturation, and lightness
+
+338
+00:13:46,800 --> 00:13:47,920
+of a color.
+
+339
+00:13:47,920 --> 00:13:49,770
+So the hue is the
+actual color itself--
+
+340
+00:13:49,770 --> 00:13:51,710
+red, green, blue.
+
+341
+00:13:51,710 --> 00:13:55,440
+The saturation is the amount
+of color you have there.
+
+342
+00:13:55,440 --> 00:13:58,800
+And the lightness is how
+light or dark a color is.
+
+343
+00:13:58,800 --> 00:14:01,320
+So this is an example
+where we have a red hue.
+
+344
+00:14:01,320 --> 00:14:02,977
+And if we turn
+down the saturation
+
+345
+00:14:02,977 --> 00:14:05,310
+you can see that it'll basically
+drain all the color out
+
+346
+00:14:05,310 --> 00:14:05,810
+of there.
+
+347
+00:14:05,810 --> 00:14:06,825
+It's very dull.
+
+348
+00:14:06,825 --> 00:14:08,910
+If we turn up the
+saturation, it's
+
+349
+00:14:08,910 --> 00:14:11,970
+going to become very
+rich and vibrant.
+
+350
+00:14:11,970 --> 00:14:13,622
+And if we turn
+down the lightness,
+
+351
+00:14:13,622 --> 00:14:15,330
+we can see we still
+have a richness here.
+
+352
+00:14:15,330 --> 00:14:17,790
+But now it's much darker.
+
+353
+00:14:17,790 --> 00:14:21,110
+And if we turn it up, it'll
+become more lighter obviously.
+
+354
+00:14:21,110 --> 00:14:23,130
+But you can see how this
+is a very easy way when
+
+355
+00:14:23,130 --> 00:14:24,720
+you pick a color and
+you say, oh but I
+
+356
+00:14:24,720 --> 00:14:26,970
+wish it were a little bit
+lighter or a little bit more
+
+357
+00:14:26,970 --> 00:14:28,230
+saturated or less saturated.
+
+358
+00:14:28,230 --> 00:14:30,000
+This is a much more
+intuitive mental model
+
+359
+00:14:30,000 --> 00:14:32,220
+I think of how to
+adjust your colors.
+
+360
+00:14:32,220 --> 00:14:33,720
+And there's lots
+of online tools you
+
+361
+00:14:33,720 --> 00:14:35,220
+can use where you
+can stick it in
+
+362
+00:14:35,220 --> 00:14:38,527
+and it'll sort of allow
+you to adjust the sliders
+
+363
+00:14:38,527 --> 00:14:40,860
+a little bit for your saturation
+and lightness and such.
+
+364
+00:14:43,535 --> 00:14:45,410
+So that was a little
+bit of the color theory.
+
+365
+00:14:45,410 --> 00:14:49,040
+Now some other practicalities
+of how I choose color.
+
+366
+00:14:49,040 --> 00:14:51,470
+So I'm sort of a color pirate.
+
+367
+00:14:51,470 --> 00:14:53,790
+I use my favorite tool in
+the world all the time,
+
+368
+00:14:53,790 --> 00:14:56,202
+which is the eyedropper tool.
+
+369
+00:14:56,202 --> 00:14:58,160
+So this is a tool if
+you're not familiar-- it's
+
+370
+00:14:58,160 --> 00:15:00,360
+present in all kinds
+of design programs.
+
+371
+00:15:00,360 --> 00:15:02,420
+And you can get apps
+on your computer.
+
+372
+00:15:02,420 --> 00:15:05,810
+On my Mac, I like to use
+one called Color Slurp.
+
+373
+00:15:05,810 --> 00:15:09,110
+On Windows, I like Instant
+Eyedropper where you can just
+
+374
+00:15:09,110 --> 00:15:11,300
+click the tool, pick any
+pixel on your screen,
+
+375
+00:15:11,300 --> 00:15:13,580
+and will return
+the color for you.
+
+376
+00:15:13,580 --> 00:15:14,820
+So I use this all the time.
+
+377
+00:15:14,820 --> 00:15:16,850
+If I see a data
+visualization, for example,
+
+378
+00:15:16,850 --> 00:15:18,980
+that I really like where
+I love the color palette.
+
+379
+00:15:18,980 --> 00:15:21,410
+I'll just take my eyedropper,
+pick those colors.
+
+380
+00:15:21,410 --> 00:15:24,380
+I do this with websites,
+with photographs.
+
+381
+00:15:24,380 --> 00:15:26,900
+And then I use the HSL
+sliders to adjust the colors
+
+382
+00:15:26,900 --> 00:15:28,040
+afterwards.
+
+383
+00:15:28,040 --> 00:15:31,670
+A good example of this is this
+generative conference badge
+
+384
+00:15:31,670 --> 00:15:33,440
+that I designed this summer.
+
+385
+00:15:33,440 --> 00:15:36,163
+And I got the inspiration
+from my mom's day planner.
+
+386
+00:15:36,163 --> 00:15:38,330
+I went to visit my parents
+and saw this day planner.
+
+387
+00:15:38,330 --> 00:15:40,850
+And I really liked it so I
+just took a picture of it.
+
+388
+00:15:40,850 --> 00:15:42,950
+And when it came time
+to design the graphic,
+
+389
+00:15:42,950 --> 00:15:46,070
+I took my eyedropper tool,
+picked all the colors I liked,
+
+390
+00:15:46,070 --> 00:15:48,590
+adjusted them a little
+bit with the HSL sliders,
+
+391
+00:15:48,590 --> 00:15:52,060
+and then had my color palette.
+
+392
+00:15:52,060 --> 00:15:54,730
+And finally, I want to talk a
+little bit about backgrounds.
+
+393
+00:15:54,730 --> 00:15:59,540
+So one thing I actually like
+a lot about the default ggplot
+
+394
+00:15:59,540 --> 00:16:02,182
+theme is that it doesn't
+use a white background.
+
+395
+00:16:02,182 --> 00:16:03,640
+White backgrounds
+are not terrible.
+
+396
+00:16:03,640 --> 00:16:05,890
+There's lots of-- you know,
+there's a time and place.
+
+397
+00:16:05,890 --> 00:16:08,020
+But I think they're very
+overused, especially
+
+398
+00:16:08,020 --> 00:16:10,570
+because white is a very
+harsh color especially
+
+399
+00:16:10,570 --> 00:16:11,590
+on digital screens.
+
+400
+00:16:11,590 --> 00:16:14,110
+White is a very aggressive
+and bright color.
+
+401
+00:16:14,110 --> 00:16:17,200
+So I encourage you to sort of
+not necessarily go straight
+
+402
+00:16:17,200 --> 00:16:19,520
+to white as a
+background as a default.
+
+403
+00:16:19,520 --> 00:16:21,220
+And instead, explore
+some other options.
+
+404
+00:16:21,220 --> 00:16:24,970
+Recently I've really liked
+this sort of ivory color.
+
+405
+00:16:24,970 --> 00:16:27,760
+A light gray color
+can also be very nice.
+
+406
+00:16:27,760 --> 00:16:29,990
+Or dark backgrounds are
+fun to experiment with.
+
+407
+00:16:29,990 --> 00:16:31,978
+But if you do go with
+a dark background,
+
+408
+00:16:31,978 --> 00:16:34,270
+just like I don't recommend
+a pure white background all
+
+409
+00:16:34,270 --> 00:16:36,988
+the time, I would be
+careful unless you
+
+410
+00:16:36,988 --> 00:16:38,530
+have a specific
+reason about choosing
+
+411
+00:16:38,530 --> 00:16:42,220
+a pure black background.
+
+412
+00:16:42,220 --> 00:16:43,720
+So to review a
+little bit, I have
+
+413
+00:16:43,720 --> 00:16:45,760
+talked about how
+you can establish
+
+414
+00:16:45,760 --> 00:16:48,580
+a good layout in your
+data visualizations
+
+415
+00:16:48,580 --> 00:16:51,370
+by creating clean
+lines and symmetry,
+
+416
+00:16:51,370 --> 00:16:54,870
+reducing clutter, and
+increasing white space.
+
+417
+00:16:54,870 --> 00:16:59,590
+And you can use good fonts,
+not use system fonts,
+
+418
+00:16:59,590 --> 00:17:01,660
+and establish a
+typographic hierarchy
+
+419
+00:17:01,660 --> 00:17:04,858
+to help guide readers
+through your visualization.
+
+420
+00:17:04,858 --> 00:17:06,400
+And then, hopefully,
+I have given you
+
+421
+00:17:06,400 --> 00:17:07,869
+a little bit of
+the tools that you
+
+422
+00:17:07,869 --> 00:17:10,510
+need to start coming up
+with your own palettes
+
+423
+00:17:10,510 --> 00:17:13,810
+and choosing your
+own color palettes.
+
+424
+00:17:13,810 --> 00:17:16,119
+And with that, I
+will say thank you.
+
+425
+00:17:16,119 --> 00:17:18,015
+And that's it.
+
+426
+00:17:18,015 --> 00:17:19,955
+[APPLAUSE]
+
+427
+00:17:25,167 --> 00:17:26,500
+ANNOUNCER: Thanks so much, Will.
+
+428
+00:17:26,500 --> 00:17:28,359
+I have questions
+from the audience,
+
+429
+00:17:28,359 --> 00:17:32,740
+while Tyler, you can come get
+set up a little if you want.
+
+430
+00:17:32,740 --> 00:17:36,970
+The first one is, do you have
+any specific recommendations
+
+431
+00:17:36,970 --> 00:17:40,515
+for aesthetics for maps?
+
+432
+00:17:40,515 --> 00:17:41,890
+WILL CHASE:
+Aesthetics for maps-
+
+433
+00:17:41,890 --> 00:17:45,700
+I mean, essentially all the
+same rules apply, right?
+
+434
+00:17:45,700 --> 00:17:49,300
+Maps you want to
+try to reduce a lot
+
+435
+00:17:49,300 --> 00:17:52,120
+of times the
+extraneous elements.
+
+436
+00:17:52,120 --> 00:17:54,760
+So maps often have a lot of
+extraneous elements and borders
+
+437
+00:17:54,760 --> 00:17:57,210
+and such.
+
+438
+00:17:57,210 --> 00:17:59,140
+And sometimes you're
+going for a thematic map.
+
+439
+00:17:59,140 --> 00:18:00,932
+You actually might want
+to emphasize those.
+
+440
+00:18:00,932 --> 00:18:04,600
+But if you're trying to go for
+a very clean, easy to read map,
+
+441
+00:18:04,600 --> 00:18:06,532
+you have to think about that.
+
+442
+00:18:06,532 --> 00:18:07,990
+There's also a lot
+to be considered
+
+443
+00:18:07,990 --> 00:18:10,510
+in maps with iconography.
+
+444
+00:18:10,510 --> 00:18:13,000
+So using proper icons
+that help readers identify
+
+445
+00:18:13,000 --> 00:18:18,040
+whatever you're looking for
+or using a really careful type
+
+446
+00:18:18,040 --> 00:18:18,600
+hierarchy.
+
+447
+00:18:18,600 --> 00:18:20,590
+So you have to really, really
+be careful about your type
+
+448
+00:18:20,590 --> 00:18:23,110
+hierarchy and spend a lot of
+time designing that for a map
+
+449
+00:18:23,110 --> 00:18:27,350
+since you have so many
+labels and so much type.
+
+450
+00:18:27,350 --> 00:18:31,550
+ANNOUNCER: Next one is shouldn't
+a binding constraint for color
+
+451
+00:18:31,550 --> 00:18:33,687
+be color blind friendliness?
+
+452
+00:18:33,687 --> 00:18:35,270
+WILL CHASE: Yes,
+absolutely it should.
+
+453
+00:18:35,270 --> 00:18:36,853
+I didn't have time
+to talk about this.
+
+454
+00:18:36,853 --> 00:18:38,370
+One of my slides
+got cut for time.
+
+455
+00:18:38,370 --> 00:18:40,940
+But another very important
+thing to do in color
+
+456
+00:18:40,940 --> 00:18:41,773
+is accessibility.
+
+457
+00:18:41,773 --> 00:18:43,940
+So you should always be
+checking your color palettes
+
+458
+00:18:43,940 --> 00:18:46,260
+for color blindness
+and also for contrast.
+
+459
+00:18:46,260 --> 00:18:49,815
+And there's easy websites
+where you can do that.
+
+460
+00:18:49,815 --> 00:18:51,440
+ANNOUNCER: Why is it
+better for a title
+
+461
+00:18:51,440 --> 00:18:54,947
+to be left aligned
+instead of centered?
+
+462
+00:18:54,947 --> 00:18:57,530
+WILL CHASE: The reason is mainly
+because, in Western countries
+
+463
+00:18:57,530 --> 00:18:59,730
+at least, humans read
+from the top left.
+
+464
+00:18:59,730 --> 00:19:01,730
+So that's where your eye
+goes first on the page.
+
+465
+00:19:01,730 --> 00:19:03,230
+There's several eye
+tracking studies
+
+466
+00:19:03,230 --> 00:19:05,030
+that show that
+your eye goes first
+
+467
+00:19:05,030 --> 00:19:07,980
+to the top left of the page and
+then to the middle of the page.
+
+468
+00:19:07,980 --> 00:19:09,680
+And so putting the
+title at the top left
+
+469
+00:19:09,680 --> 00:19:12,110
+is basically reducing
+the amount of work
+
+470
+00:19:12,110 --> 00:19:15,860
+that the reader has to do
+to get to the information.
+
+471
+00:19:15,860 --> 00:19:19,520
+ANNOUNCER: Couple more-- how
+long should one typically spend
+
+472
+00:19:19,520 --> 00:19:21,890
+on creating/designing a chart?
+
+473
+00:19:21,890 --> 00:19:26,900
+How long does it typically
+take you to create one?
+
+474
+00:19:26,900 --> 00:19:29,300
+WILL CHASE: To create a
+simple design, like something
+
+475
+00:19:29,300 --> 00:19:30,717
+I would do for
+Fidelity, you know,
+
+476
+00:19:30,717 --> 00:19:34,430
+something that just needs to
+look clean and and readable, I
+
+477
+00:19:34,430 --> 00:19:38,390
+spend, I don't know, maybe a
+couple hours designing a chart.
+
+478
+00:19:38,390 --> 00:19:40,280
+If I'm designing
+something more thematic
+
+479
+00:19:40,280 --> 00:19:42,980
+or something sort of a
+personal project, something
+
+480
+00:19:42,980 --> 00:19:45,935
+more creative, I mean,
+it can take months.
+
+481
+00:19:45,935 --> 00:19:47,810
+You know it's not all
+a month of sitting down
+
+482
+00:19:47,810 --> 00:19:50,280
+just like designing nonstop
+for eight hours a day.
+
+483
+00:19:50,280 --> 00:19:52,760
+But it's months of like
+laying in bed at 4:00 AM
+
+484
+00:19:52,760 --> 00:19:56,085
+thinking about colors.
+
+485
+00:19:56,085 --> 00:19:56,960
+ANNOUNCER: That's it.
+
+486
+00:19:56,960 --> 00:20:00,510
+Thoughts on Tufte theme charts--
+
+487
+00:20:00,510 --> 00:20:01,520
+WILL CHASE: I like it.
+
+488
+00:20:01,520 --> 00:20:03,860
+ANNOUNCER: --question mark.
+
+489
+00:20:03,860 --> 00:20:05,880
+WILL CHASE: That's all I'll say.
+
+490
+00:20:05,880 --> 00:20:09,230
+ANNOUNCER: Great,
+and then oh, what
+
+491
+00:20:09,230 --> 00:20:12,452
+tool has been used for creating
+the presentation slides?
+
+492
+00:20:12,452 --> 00:20:13,910
+WILL CHASE: The
+presentation slides
+
+493
+00:20:13,910 --> 00:20:14,900
+were created with Keynote.
+
+494
+00:20:14,900 --> 00:20:16,983
+And let me emphasize,
+actually, I want to clarify.
+
+495
+00:20:16,983 --> 00:20:19,460
+I like the Tufte
+R Markdown theme.
+
+496
+00:20:19,460 --> 00:20:21,460
+I don't always agree with
+everything Tufte says.
+
+497
+00:20:21,460 --> 00:20:23,377
+So Tufte-- if you read
+like his dataviz books,
+
+498
+00:20:23,377 --> 00:20:26,420
+he has a lot of opinions.
+
+499
+00:20:26,420 --> 00:20:27,860
+I don't agree with all of those.
+
+500
+00:20:27,860 --> 00:20:29,600
+But there is a Tufte
+R Markdown theme
+
+501
+00:20:29,600 --> 00:20:33,110
+that's based on some of his
+writings which I really like.
+
+502
+00:20:33,110 --> 00:20:34,860
+ANNOUNCER: And then
+the last one before we
+
+503
+00:20:34,860 --> 00:20:37,340
+let Tyler get
+going is how do you
+
+504
+00:20:37,340 --> 00:20:40,550
+deal with viewers using monitors
+that might render colors
+
+505
+00:20:40,550 --> 00:20:42,820
+slightly differently?
+
+506
+00:20:42,820 --> 00:20:44,790
+WILL CHASE: Yeah
+it's a good question.
+
+507
+00:20:44,790 --> 00:20:48,350
+I mean, there's very little you
+can do about that to be honest.
+
+508
+00:20:48,350 --> 00:20:52,110
+I don't have a magical solution
+to change everyone's monitors
+
+509
+00:20:52,110 --> 00:20:53,400
+for you.
+
+510
+00:20:53,400 --> 00:20:56,840
+All I can say is that we are
+lucky to live in 2020 when
+
+511
+00:20:56,840 --> 00:20:57,800
+people have--
+
+512
+00:20:57,800 --> 00:21:00,140
+most people have more
+high resolution monitors.
+
+513
+00:21:00,140 --> 00:21:02,480
+So we can use things
+like fonts that
+
+514
+00:21:02,480 --> 00:21:05,390
+have a lot of details
+in them and, you know,
+
+515
+00:21:05,390 --> 00:21:06,650
+nice color palettes.
+
+516
+00:21:06,650 --> 00:21:08,432
+But it's tricky.
+
+517
+00:21:08,432 --> 00:21:09,890
+ANNOUNCER: Well,
+thank you so much.
+
+518
+00:21:09,890 --> 00:21:11,660
+Another round of
+applause for Will.
+
+519
+00:21:11,660 --> 00:21:12,920
+WILL CHASE: All right, thanks.
+
+520
+00:21:12,920 --> 00:21:13,820
+[APPLAUSE]
+
+521
+00:21:13,820 --> 00:21:16,570
+[R STUDIO SOUND BITE]
